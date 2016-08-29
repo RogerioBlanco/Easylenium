@@ -35,9 +35,14 @@
 		<url>https://github.com/RogerioBlanco/Easylenium</url>
 	</scm>
 
+	<modules>
+		<module>core</module>
+	</modules>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
+		<org.apache.commons.version>3.4</org.apache.commons.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 
@@ -46,7 +51,7 @@
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
-				<version>3.4</version>
+				<version>${org.apache.commons.version}</version>
 			</dependency>
 
 			<dependency>
