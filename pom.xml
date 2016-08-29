@@ -1,11 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>org</groupId>
 	<artifactId>easylenium</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
 	<name>Easylenium</name>
-
-
+	<url>https://github.com/RogerioBlanco/Easylenium</url>
 	
+	<developers>
+		<developer>
+			<name>Rogério Blanco</name>
+			<email>rogerio.b.nunes@gmail.com</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git://github.com:RogerioBlanco/Easylenium.git</connection>
+		<developerConnection>scm:git:ssh://github.com:RogerioBlanco/Easylenium.git</developerConnection>
+		<url>https://github.com/RogerioBlanco/Easylenium</url>
+	</scm>
 </project>
