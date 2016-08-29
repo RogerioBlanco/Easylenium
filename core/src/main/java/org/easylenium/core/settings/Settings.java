@@ -2,12 +2,11 @@ package org.easylenium.core.settings;
 
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
+import org.easylenium.core.interfaces.Validade;
 import org.easylenium.core.settings.exception.SettingsValidationException;
+import org.easylenium.core.settings.selenium.SeleniumSettings;
 
 /**
  * <p>
@@ -17,32 +16,43 @@ import org.easylenium.core.settings.exception.SettingsValidationException;
  * @author rogerionunes
  *
  */
-public class Settings {
+public class Settings implements Validade{
 
 	private String projectName;
-	
-	private Collection<Browser> browsers;
-	
-	private String directoryPathSuite;
 
-	private String directoryPathCaseTests;
-	
-	private TimeOut timeout;
-	
-	public Settings(){
-		browsers = Collections.emptyList();
-	}
-	
+	private String pathTestsSuites;
+
+	private String pathTestsCases;
+
+	private SeleniumSettings seleniumSettings;
+
 	public void validate() {
 		if (StringUtils.isEmpty(projectName))
 			throw new SettingsValidationException("The name of project does not can be empty.");
 
-		if(browsers.isEmpty())
-			throw new SettingsValidationException("It must be selected at least one browser");
-		
-		if(!validPath(directoryPathSuite))
-			throw new SettingsValidationException("");
-		
+		if (!validPath(pathTestsSuites))
+			throw new SettingsValidationException("The directory path of test suites must be valid.");
+
+		if (!validPath(pathTestsCases))
+			throw new SettingsValidationException("The directory path of test cases must be valid.");
+
+		if (seleniumSettings == null)
+			throw new SettingsValidationException("Must be filled for specific settings for selenium.");
+
+		seleniumSettings.validate();
+	}
+
+	private boolean validPath(String path) {
+
+		try {
+			Paths.get(path);
+		} catch (InvalidPathException e) {
+			return Boolean.FALSE;
+		} catch (NullPointerException e) {
+			return Boolean.FALSE;
+		}
+
+		return Boolean.TRUE;
 	}
 
 	public String getProjectName() {
@@ -52,25 +62,21 @@ public class Settings {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-	
-	public Collection<Browser> getBrowsers() {
-		return browsers;
+
+	public String getPathTestsSuites() {
+		return pathTestsSuites;
 	}
-	
-	public void addBrowser(Browser... browsers){
-		this.browsers.addAll(Arrays.asList(browsers));
+
+	public void setPathTestsSuites(String pathTestsSuites) {
+		this.pathTestsSuites = pathTestsSuites;
 	}
-	
-	private boolean validPath(String path){
-		
-		try{
-			Paths.get(path);
-		}catch (InvalidPathException e){
-			return Boolean.FALSE;
-		}catch (NullPointerException e) {
-			return Boolean.FALSE;
-		}
-		
-		return Boolean.TRUE;
+
+	public String getPathTestsCases() {
+		return pathTestsCases;
 	}
+
+	public void setPathTestsCases(String pathTestsCases) {
+		this.pathTestsCases = pathTestsCases;
+	}
+
 }
