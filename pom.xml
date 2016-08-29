@@ -2,14 +2,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org</groupId>
-	<artifactId>easylenium</artifactId>
+	<groupId>org.easylenium</groupId>
+	<artifactId>easyleniym-parent</artifactId>
 	<version>1.0.0</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>Easylenium</name>
+	<description>This is a framework is to facilitate the creation and maintenance of test cases using Selenium and jUnit.</description>
 	<url>https://github.com/RogerioBlanco/Easylenium</url>
-	
+
+	<organization>
+		<name>Easylenium</name>
+	</organization>
+
 	<developers>
 		<developer>
 			<name>Rogério Blanco</name>
@@ -29,4 +34,27 @@
 		<developerConnection>scm:git:ssh://github.com:RogerioBlanco/Easylenium.git</developerConnection>
 		<url>https://github.com/RogerioBlanco/Easylenium</url>
 	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.7</java.version>
+		<junit.version>4.12</junit.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 </project>
