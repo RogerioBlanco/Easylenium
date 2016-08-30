@@ -4,7 +4,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
 import org.apache.commons.lang3.StringUtils;
-import org.easylenium.core.interfaces.Validade;
+import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.settings.exception.SettingsValidationException;
 import org.easylenium.core.settings.selenium.SeleniumSettings;
 
@@ -16,7 +16,7 @@ import org.easylenium.core.settings.selenium.SeleniumSettings;
  * @author rogerionunes
  *
  */
-public class Settings implements Validade{
+public class Settings implements Validate{
 
 	private String projectName;
 

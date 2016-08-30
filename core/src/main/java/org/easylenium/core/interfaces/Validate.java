@@ -1,6 +1,6 @@
 package org.easylenium.core.interfaces;
 
-public interface Validade {
+public interface Validate {
 
 	public void validate();
 }

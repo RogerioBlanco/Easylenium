@@ -1,14 +1,15 @@
 package org.easylenium.core.testsuite;
 
 import java.util.Collection;
+import java.util.Map;
 
-import org.easylenium.core.testcase.TestCaseData;
+import org.easylenium.core.testcase.TestCase;
 
 import junit.framework.TestSuite;
 
 public class TestSuitesManager {
 
-	public TestSuitesManager(String path, Collection<TestCaseData> testsCaseData) {
+	public TestSuitesManager(String path, Map<String, TestCase> testsCases) {
 		
 	}
 

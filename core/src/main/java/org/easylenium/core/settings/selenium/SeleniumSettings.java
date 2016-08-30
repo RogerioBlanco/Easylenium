@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.easylenium.core.interfaces.Validade;
+import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.settings.Timeout;
 import org.easylenium.core.settings.exception.SettingsValidationException;
 
-public class SeleniumSettings implements Validade {
+public class SeleniumSettings implements Validate {
 
 	private Collection<Browser> browsers;
 

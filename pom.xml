@@ -38,16 +38,23 @@
 	<modules>
 		<module>core</module>
 	</modules>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
 		<org.apache.commons.version>3.4</org.apache.commons.version>
+		<commonsio.version>2.5</commonsio.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commonsio.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
