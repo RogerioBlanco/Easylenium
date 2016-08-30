@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.easylenium.core.file.exception.ParseFileToDocumentException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -24,7 +25,7 @@ public class ParseFile {
 		try {
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
-			throw new RuntimeException("Error in configuration of the parse", e);
+			throw new ParseFileToDocumentException("Error in configuration of the parse", e);
 		}
 	}
 
@@ -36,7 +37,7 @@ public class ParseFile {
 			
 			return document;
 		} catch (IOException e) {
-			throw new RuntimeException("Error to load the file.", e);
+			throw new ParseFileToDocumentException("Error to load the file.", e);
 		}
 	}
 

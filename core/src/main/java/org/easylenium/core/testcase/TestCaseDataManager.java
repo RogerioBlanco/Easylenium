@@ -1,12 +1,13 @@
 package org.easylenium.core.testcase;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
-import org.easylenium.core.file.LoadRecursivelyFiles;
+import org.easylenium.core.file.LoadFiles;
 import org.easylenium.core.file.ParseFile;
 import org.easylenium.core.file.exception.ParseFileToDocumentException;
+import org.easylenium.core.testcase.xml.TestCaseRootNode;
+import org.easylenium.core.util.Table;
 import org.easylenium.core.xml.RootNode;
 import org.xml.sax.SAXException;
 
@@ -18,26 +19,29 @@ public class TestCaseDataManager {
 		this.path = path;
 	}
 
-	public Map<String, Map<TestCaseData, TestCase>> setUpAllTestsCases() {
-		Map<String, File> mapFiles = new LoadRecursivelyFiles(path).loadFiles();
-		
-		Map<String, Map<TestCaseData, TestCase>> map = new HashMap<String, Map<TestCaseData,TestCase>>();
-		
-		for(String key : mapFiles.keySet()){
-			File file = mapFiles.get(key);
+	public Table<String, String, TestCase> setUpAllTestsCases() {
+		Table<String, String, TestCase> table = new Table<String, String, TestCase>();
+
+		Collection<File> files = new LoadFiles(path).loadRecursively();
+
+		for(File file : files){
 			try {
-				TestCaseData testCaseData = new TestCaseData(key, new RootNode(new ParseFile(file).toDocument()));
+				TestCaseRootNode testCaseRootNode = new TestCaseRootNode(new RootNode(new ParseFile(file).toDocument()));
 				
-				testCaseData.validate(file);
+				TestCaseData testCaseData = new TestCaseData(file, testCaseRootNode);
 				
-				map.putAll(testCaseData.getMapTestsCases());
+				testCaseData.validate();
+				
+				for(TestCase testCase : testCaseData.getTestsCases())
+					table.put(testCase.getKey(), testCase);
+				
 			} catch (SAXException e) {
 				throw new ParseFileToDocumentException(file, e);
 			}
 			
 		}
 		
-		return map;
+		return table;
 	}
 
 }

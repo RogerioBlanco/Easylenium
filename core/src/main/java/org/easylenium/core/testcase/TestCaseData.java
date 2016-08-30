@@ -1,40 +1,37 @@
 package org.easylenium.core.testcase;
 
 import java.io.File;
-import java.util.Map;
+import java.util.Collection;
+import java.util.Collections;
 
-import org.easylenium.core.xml.NodeElement;
-import org.easylenium.core.xml.RootNode;
-import org.easylenium.core.xml.exception.TagUnequalsException;
+import org.apache.commons.io.FilenameUtils;
+import org.easylenium.core.interfaces.Validate;
+import org.easylenium.core.testcase.xml.TestCaseNode;
+import org.easylenium.core.testcase.xml.TestCaseRootNode;
+import org.easylenium.core.xml.exception.RequirementException;
 
-public class TestCaseData {
+public class TestCaseData implements Validate{
 
-	private static final String TAG_NAME = "TestCaseData";
+	private TestCaseRootNode rootNode;
 
-	private static final String ATTR_EXECUTOR_CLASS = "Executor";
-
-	private static final String ATTR_DATA_CLASS = "Data";
-
-	private String key;
-
-	private RootNode rootNode;
+	private File file;
 
 	private String executorClassName;
 
 	private String dataClassName;
 
-	public TestCaseData(String key, RootNode rootNode) {
-		this.key = key;
+	public TestCaseData(File file, TestCaseRootNode rootNode) {
+		this.file = file;
+		
 		this.rootNode = rootNode;
 
-		executorClassName = rootNode.getAttribute(ATTR_EXECUTOR_CLASS);
+		executorClassName = rootNode.getExecutorClass();
 
-		dataClassName = rootNode.getAttribute(ATTR_DATA_CLASS);
+		dataClassName = rootNode.getDataClass();
 	}
 
-	public void validate(File file) {
-		if (!TAG_NAME.equalsIgnoreCase(rootNode.getElement().getTagName()))
-			throw new TagUnequalsException(TAG_NAME, file);
+	public void validate() {
+		rootNode.validate(file);
 		
 		validateClassName(executorClassName);
 
@@ -45,18 +42,30 @@ public class TestCaseData {
 		try {
 			Class.forName(dataClassName);
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(String.format("The class '%s' not exists or not find in the classpath.", className), e);
+			throw new RequirementException(e, "The class '%s' not exists or not find in the classpath.", className);
 		}		
 	}
 
-	public Map<String, TestCase> getMapTestsCases() {
+	public Collection<TestCase> getTestsCases() {
+		Collection<TestCaseNode> nodesWithReferences = Collections.emptyList();
+		Collection<TestCaseNode> nodesOriginal = Collections.emptyList();
 		
-		for (NodeElement node : rootNode.getChildrenNodes()) {
-			TestCaseNode testCase = new TestCaseNode(node);
+		rootNode.getOriginalNodes();
+		rootNode.getReferenceNodes();
+		for (TestCaseNode node : ) {
+			node.validate();
 			
+			if(node.hasReference()){
+				nodesWithReferences.add(node);
+			} else {
+				nodesOriginal.add(node);
+			}
 		}
 
 		return null;
 	}
 
+	public String getId() {
+		return FilenameUtils.removeExtension(file.getName());
+	}
 }

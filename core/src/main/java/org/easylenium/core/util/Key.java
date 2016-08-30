@@ -1,4 +1,4 @@
-package org.easylenium.core.key;
+package org.easylenium.core.util;
 
 public class Key<X, Y> {
 
@@ -15,8 +15,14 @@ public class Key<X, Y> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Key)) return false;
-        Key key = (Key) o;
-        return x == key.x && y == key.y;
+        
+        Key<?, ?> key = (Key<?, ?>) o;
+        
+        if((x == null && key.x != null) || (x != null && key.x == null)) return false;
+
+        if((y == null && key.y != null) || (y != null && key.y == null)) return false;
+
+        return x.equals(key.x) && y.equals(key.y);
     }
 
     @Override
