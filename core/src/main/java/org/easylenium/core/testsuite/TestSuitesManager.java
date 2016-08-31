@@ -9,8 +9,13 @@ import junit.framework.TestSuite;
 
 public class TestSuitesManager {
 
-	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table) {
+	private String path;
 
+	private Table<String, String, TestCase<?>> table;
+
+	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table) {
+		this.path = path;
+		this.table = table;
 	}
 
 	public Collection<TestSuite> createAllTestsSuites() {

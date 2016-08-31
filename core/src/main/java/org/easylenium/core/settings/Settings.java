@@ -4,9 +4,9 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
 import org.apache.commons.lang3.StringUtils;
+import org.easyleniu.selenium.settings.SeleniumSettings;
 import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.settings.exception.SettingsValidationException;
-import org.easylenium.core.settings.selenium.SeleniumSettings;
 
 /**
  * <p>

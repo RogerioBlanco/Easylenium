@@ -1,4 +1,4 @@
-package org.easylenium.core.settings.selenium;
+package org.easyleniu.selenium.settings;
 
 public enum Browser {
 
