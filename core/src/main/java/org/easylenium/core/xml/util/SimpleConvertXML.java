@@ -1,4 +1,4 @@
-package org.easylenium.core.testcase.xml;
+package org.easylenium.core.xml.util;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.easylenium.core.testcase.xml.exception.ConvertNodeToPojoException;
+import org.easylenium.core.xml.exception.ConvertNodeToPojoException;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.core.ValueRequiredException;
 

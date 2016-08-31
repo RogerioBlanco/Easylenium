@@ -1,4 +1,4 @@
-package org.easylenium.core.testcase.xml;
+package org.easylenium.core.xml.util;
 
 public class ClonePropertiesException extends RuntimeException {
 

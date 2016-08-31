@@ -1,4 +1,4 @@
-package org.easylenium.core.testcase.xml.exception;
+package org.easylenium.core.xml.exception;
 
 public class ConvertNodeToPojoException extends RuntimeException {
 

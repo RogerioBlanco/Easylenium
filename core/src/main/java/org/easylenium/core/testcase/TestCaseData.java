@@ -48,12 +48,12 @@ public class TestCaseData implements Validate{
 		}		
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Collection<TestCase<?>> getTestsCases() {
 		Collection<TestCase<?>> cases = Collections.emptyList();
 		Map<String, TestCase<?>> templates = new HashMap<String, TestCase<?>>();
 		
 		for (TestCaseNode node : rootNode.getChildrenNodesWithoutAttributeTemplate()) {
-			@SuppressWarnings("unchecked")
 			TestCase<?> testCase = new TestCase(executorClass(), dataClass(), getId(), node);
 			
 			cases.add(testCase);
@@ -62,7 +62,6 @@ public class TestCaseData implements Validate{
 		}
 		
 		for(TestCaseNode node: rootNode.getChildrenNodesWithoutAttributeTemplate()){
-			@SuppressWarnings("unchecked")
 			TestCase<?> testCase = new TestCase(executorClass(), dataClass(), getId(), node, templates.get(node.getId()));
 			
 			cases.add(testCase);

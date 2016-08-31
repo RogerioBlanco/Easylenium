@@ -16,10 +16,15 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.easylenium</groupId>
+			<artifactId>selenium</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.simpleframework</groupId>
 			<artifactId>simple-xml</artifactId>
