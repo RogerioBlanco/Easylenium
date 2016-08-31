@@ -3,6 +3,8 @@ package org.easylenium.core.testcase;
 import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
 import org.easylenium.core.interfaces.Validate;
@@ -46,23 +48,47 @@ public class TestCaseData implements Validate{
 		}		
 	}
 
-	public Collection<TestCase> getTestsCases() {
-		Collection<TestCaseNode> nodesWithReferences = Collections.emptyList();
-		Collection<TestCaseNode> nodesOriginal = Collections.emptyList();
+	public Collection<TestCase<?>> getTestsCases() {
+		Collection<TestCase<?>> cases = Collections.emptyList();
+		Map<String, TestCase<?>> templates = new HashMap<String, TestCase<?>>();
 		
-		rootNode.getOriginalNodes();
-		rootNode.getReferenceNodes();
-		for (TestCaseNode node : ) {
-			node.validate();
+		for (TestCaseNode node : rootNode.getChildrenNodesWithoutAttributeTemplate()) {
+			@SuppressWarnings("unchecked")
+			TestCase<?> testCase = new TestCase(executorClass(), dataClass(), getId(), node);
 			
-			if(node.hasReference()){
-				nodesWithReferences.add(node);
-			} else {
-				nodesOriginal.add(node);
-			}
+			cases.add(testCase);
+			
+			templates.put(node.getId(), testCase);
 		}
+		
+		for(TestCaseNode node: rootNode.getChildrenNodesWithoutAttributeTemplate()){
+			@SuppressWarnings("unchecked")
+			TestCase<?> testCase = new TestCase(executorClass(), dataClass(), getId(), node, templates.get(node.getId()));
+			
+			cases.add(testCase);
+		}
+		
+		return cases;
+	}
 
-		return null;
+
+	private Class<?> executorClass() {
+		validateClassName(executorClassName);
+		try {
+			return Class.forName(executorClassName);
+		} catch (ClassNotFoundException e) { 
+			throw new RuntimeException(e);/*ignored because has been validated*/
+		}
+	}
+	
+	private Class<?> dataClass() {
+		validateClassName(dataClassName);
+		
+		try {
+			return Class.forName(dataClassName);
+		} catch (ClassNotFoundException e) { 
+			throw new RuntimeException(e);/*ignored because has been validated*/
+		}
 	}
 
 	public String getId() {

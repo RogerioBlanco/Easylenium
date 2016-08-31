@@ -19,8 +19,8 @@ public class TestCaseDataManager {
 		this.path = path;
 	}
 
-	public Table<String, String, TestCase> setUpAllTestsCases() {
-		Table<String, String, TestCase> table = new Table<String, String, TestCase>();
+	public Table<String, String, TestCase<?>> setUpAllTestsCases() {
+		Table<String, String, TestCase<?>> table = new Table<String, String, TestCase<?>>();
 
 		Collection<File> files = new LoadFiles(path).loadRecursively();
 
@@ -32,7 +32,7 @@ public class TestCaseDataManager {
 				
 				testCaseData.validate();
 				
-				for(TestCase testCase : testCaseData.getTestsCases())
+				for(TestCase<?> testCase : testCaseData.getTestsCases())
 					table.put(testCase.getKey(), testCase);
 				
 			} catch (SAXException e) {

@@ -26,7 +26,7 @@ public class FactorySeleniumSuite {
 
 		TestSuite mainTestSuite = new TestSuite(settings.getProjectName());
 
-		Table<String, String, TestCase> tableTestsCases = new TestCaseDataManager(settings.getPathTestsCases()).setUpAllTestsCases();
+		Table<String, String, TestCase<?>> tableTestsCases = new TestCaseDataManager(settings.getPathTestsCases()).setUpAllTestsCases();
 		
 		Collection<TestSuite> testsSuites = new TestSuitesManager(settings.getPathTestsSuites(), tableTestsCases).createAllTestsSuites();
 

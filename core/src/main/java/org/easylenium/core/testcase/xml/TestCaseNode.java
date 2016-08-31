@@ -5,6 +5,8 @@ import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.xml.NodeElement;
 import org.easylenium.core.xml.exception.RequirementException;
 import org.easylenium.core.xml.exception.TagUnequalsException;
+import org.easylenium.core.xml.util.ConvertNodeIntoString;
+import org.w3c.dom.Element;
 
 public class TestCaseNode implements Validate {
 
@@ -12,7 +14,7 @@ public class TestCaseNode implements Validate {
 
 	private static final String ATTR_ID = "id";
 
-	private static final String ATTR_REF = "ref";
+	private static final String ATTR_TEMPLATE = "template";
 
 	private NodeElement node;
 
@@ -33,12 +35,22 @@ public class TestCaseNode implements Validate {
 		return node.getAttribute(ATTR_ID);
 	}
 
-	public String getReference(){
-		return node.getAttribute(ATTR_REF);
+	public String getTemplate(){
+		return node.getAttribute(ATTR_TEMPLATE);
 	}
 	
-	public boolean hasReference() {
-		return StringUtils.isNotEmpty(getReference());
+	public boolean hasTemplate() {
+		return StringUtils.isNotEmpty(getTemplate());
+	}
+	
+	public Element getElement(){
+		return node.getElement();
+	}
+	
+	@Override
+	public String toString() {
+		return new ConvertNodeIntoString(node.getElement()).doIt();
 	}
 
+	
 }

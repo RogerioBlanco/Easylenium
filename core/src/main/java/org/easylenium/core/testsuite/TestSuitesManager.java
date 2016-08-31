@@ -9,7 +9,7 @@ import junit.framework.TestSuite;
 
 public class TestSuitesManager {
 
-	public TestSuitesManager(String path, Table<String, String, TestCase> table) {
+	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table) {
 
 	}
 

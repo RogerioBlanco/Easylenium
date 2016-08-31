@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.easylenium.core.util.IPredicate;
+import org.easylenium.core.util.Predicate;
 import org.easylenium.core.xml.NodeElement;
 import org.easylenium.core.xml.RootNode;
 import org.easylenium.core.xml.exception.TagUnequalsException;
@@ -18,9 +19,12 @@ public class TestCaseRootNode {
 	private static final String ATTR_DATA_CLASS = "data-class";
 
 	private RootNode rootNode;
+	
+	private Collection<TestCaseNode> childrenNodes;
 
 	public TestCaseRootNode(RootNode rootNode) {
 		this.rootNode = rootNode;
+		this.childrenNodes = readChildrenNodes();
 	}
 
 	public void validate(File file) {
@@ -35,8 +39,8 @@ public class TestCaseRootNode {
 	public String getDataClass() {
 		return rootNode.getAttribute(ATTR_DATA_CLASS);
 	}
-
-	public Collection<TestCaseNode> getChildrenNodes() {
+	
+	private Collection<TestCaseNode> readChildrenNodes() {
 		Collection<TestCaseNode> list = Collections.emptyList();
 		
 		for(NodeElement node : rootNode.getChildrenNodes()){
@@ -51,22 +55,22 @@ public class TestCaseRootNode {
 		return list;
 	}
 
-	public Collection<TestCaseNode> getOriginalNodes() {
-		
+	public Collection<TestCaseNode> getChildrenNodes() {
+		return childrenNodes;
 	}
 
-	public Collection<TestCaseNode> getReferenceNodes() {
-		// TODO Auto-generated method stub
-		
+	public Collection<TestCaseNode> getChildrenNodesWithoutAttributeTemplate() {
+		return Predicate.filter(getChildrenNodes(), new FilterNodesNodesWithoutAttributeTemplate());
+	}
+
+	public Collection<TestCaseNode> getChildrenNodesWithAttributeTemplate() {
+		return Predicate.filterInverse(getChildrenNodes(), new FilterNodesNodesWithoutAttributeTemplate());
 	}
 	
-	private static class FilterOriginalNodes implements IPredicate<TestCaseNode> {
-
+	private final static class FilterNodesNodesWithoutAttributeTemplate implements IPredicate<TestCaseNode> {
 		public boolean apply(TestCaseNode testeCaseNode) {
-			return !testeCaseNode.hasReference();
+			return !testeCaseNode.hasTemplate();
 		}
-		
 	}
-	
 
 }
