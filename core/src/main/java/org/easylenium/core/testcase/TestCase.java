@@ -1,8 +1,7 @@
 package org.easylenium.core.testcase;
 
-import org.easyleniu.selenium.page.Page;
 import org.easylenium.core.testcase.executor.Executor;
-import org.easylenium.core.testcase.executor.exception.InstantiateExecutorException;
+import org.easylenium.core.testcase.executor.FactoryExecutor;
 import org.easylenium.core.testcase.xml.TestCaseNode;
 import org.easylenium.core.util.Key;
 import org.easylenium.core.xml.util.SimpleConvertXML;
@@ -33,21 +32,21 @@ public class TestCase<T>  {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void executeExecutor(Page page){
-		Executor<T> executor = (Executor<T>) newExecutor(executorClass, page);
-		
+	public void executeExecutor(FactoryExecutor factory){
+		Executor<T> executor = (Executor<T>) factory.newExecutor(executorClass);
+//		Executor<T> executor = (Executor<T>) newExecutor(executorClass, page);
 		executor.execute(data);
 		
-		executor.validate();
+		executor.validate(data);
 	}
 	
-	private Executor<?> newExecutor(Class<? extends Executor<T>> executorClass, Page page) {
-		try {
-			return executorClass.getDeclaredConstructor(Page.class).newInstance(page);
-		} catch (Exception e) {
-			throw new InstantiateExecutorException("It was not possible instantiate an object of class " + executorClass.getName());
-		}
-	}
+//	private Executor<?> newExecutor(Class<? extends Executor<T>> executorClass, Page page) {
+//		try {
+//			return executorClass.getDeclaredConstructor(Page.class).newInstance(page);
+//		} catch (Exception e) {
+//			throw new InstantiateExecutorException("It was not possible instantiate an object of class " + executorClass.getName());
+//		}
+//	}
 
 	@SuppressWarnings("unchecked")
 	private T newData(Class<?> dataClass, TestCaseNode node){

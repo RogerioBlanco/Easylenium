@@ -5,8 +5,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.easyleniu.selenium.settings.exception.SeleniumSettingsValidationException;
+import org.easylenium.core.settings.Settings;
 
-public class SeleniumSettings {
+public class SeleniumSettings extends Settings {
 
 	private Collection<Browser> browsers;
 
@@ -17,6 +18,8 @@ public class SeleniumSettings {
 	}
 
 	public void validate() {
+		super.validate();
+		
 		if (browsers.isEmpty())
 			throw new SeleniumSettingsValidationException("It must be selected at least one browser");
 

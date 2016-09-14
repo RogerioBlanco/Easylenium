@@ -68,8 +68,8 @@ public class TestCaseRootNode {
 	}
 	
 	private final static class FilterNodesNodesWithoutAttributeTemplate implements IPredicate<TestCaseNode> {
-		public boolean apply(TestCaseNode testeCaseNode) {
-			return !testeCaseNode.hasTemplate();
+		public boolean apply(TestCaseNode node) {
+			return !node.hasTemplate();
 		}
 	}
 

@@ -1,13 +1,12 @@
 package org.easylenium.core.testcase.executor;
 
-import org.easyleniu.selenium.page.Page;
+import org.easylenium.core.testcase.executor.exception.ExpectedException;
+import org.easylenium.core.testcase.executor.exception.TimeoutException;
+import org.easylenium.core.testcase.executor.exception.ValidateTestCaseException;
 
-public abstract class Executor<T> implements Execute<T>, ValidateTestCase{
+public interface Executor<T> {
 
-	public Page page;
+	public void execute(T data) throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException;
 
-	public Executor(Page page){
-		this.page = page;
-	}
-
+	public void validate(T data) throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException;
 }

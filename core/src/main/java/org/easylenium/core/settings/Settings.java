@@ -4,7 +4,6 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
 import org.apache.commons.lang3.StringUtils;
-import org.easyleniu.selenium.settings.SeleniumSettings;
 import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.settings.exception.SettingsValidationException;
 
@@ -24,8 +23,6 @@ public class Settings implements Validate{
 
 	private String pathTestsCases;
 
-	private SeleniumSettings seleniumSettings;
-
 	public void validate() {
 		if (StringUtils.isEmpty(projectName))
 			throw new SettingsValidationException("The name of project does not can be empty.");
@@ -35,11 +32,6 @@ public class Settings implements Validate{
 
 		if (!validPath(pathTestsCases))
 			throw new SettingsValidationException("The directory path of test cases must be valid.");
-
-		if (seleniumSettings == null)
-			throw new SettingsValidationException("Must be filled for specific settings for selenium.");
-
-		seleniumSettings.validate();
 	}
 
 	private boolean validPath(String path) {

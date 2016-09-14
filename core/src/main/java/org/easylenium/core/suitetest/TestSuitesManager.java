@@ -1,15 +1,14 @@
-package org.easylenium.core.testsuite;
+package org.easylenium.core.suitetest;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.easylenium.core.file.LoadFiles;
 import org.easylenium.core.file.ParseFile;
 import org.easylenium.core.file.exception.ParseFileToDocumentException;
+import org.easylenium.core.suitetest.xml.SuiteTestRootNode;
 import org.easylenium.core.testcase.TestCase;
-import org.easylenium.core.testcase.TestCaseData;
-import org.easylenium.core.testcase.xml.TestCaseRootNode;
-import org.easylenium.core.testsuite.xml.TestSuiteRootNode;
 import org.easylenium.core.util.Table;
 import org.easylenium.core.xml.RootNode;
 import org.xml.sax.SAXException;
@@ -28,18 +27,25 @@ public class TestSuitesManager {
 	}
 
 	public Collection<TestSuite> createAllTestsSuites() {
+		Collection<TestSuite> testsSuites = Collections.emptyList();
 		Collection<File> files = new LoadFiles(path).loadRecursively();
-
+		
 		for(File file : files){
 			try {
-				TestSuiteRootNode testSuiteRootNode = new TestSuiteRootNode(new RootNode(new ParseFile(file).toDocument()));
+				SuiteTestRootNode rootNode = new SuiteTestRootNode(new RootNode(new ParseFile(file).toDocument()));
+				
+				SuiteTest suiteTest = new SuiteTest(rootNode, table);
+				
+				suiteTest.validate(file);
+				
+				testsSuites.add(suiteTest.toTestSuite());
+				
 			} catch (SAXException e) {
 				throw new ParseFileToDocumentException(file, e);
 			}
-			
 		}
 		
-		return null;
+		return testsSuites;
 	}
 
 }
