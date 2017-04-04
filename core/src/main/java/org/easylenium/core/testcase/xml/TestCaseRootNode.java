@@ -29,7 +29,7 @@ public class TestCaseRootNode {
 
 	public void validate(File file) {
 		if (!TAG_NAME.equalsIgnoreCase(rootNode.getElement().getTagName()))
-			throw new TagUnequalsException("The root element in the file '%s' is not equals to '%s'", file.getName(), TAG_NAME);
+			throw new TagUnequalsException("The root element in the file '%s' is not equals to '%s'.", file.getName(), TAG_NAME);
 	}
 
 	public String getExecutorClass() {

@@ -27,7 +27,7 @@ public class TestCaseNode implements Validate {
 			throw new TagUnequalsException(TAG_NAME);
 		
 		if(StringUtils.isEmpty(getId()))
-			throw new RequirementException("Exists an element that does not have an id.");
+			throw new RequirementException("Exists an element that does't have an ID.");
 		
 	}
 

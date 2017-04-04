@@ -15,7 +15,7 @@ import org.easylenium.core.settings.exception.SettingsValidationException;
  * @author rogerionunes
  *
  */
-public class Settings implements Validate{
+public class Settings implements Validate {
 
 	private String projectName;
 

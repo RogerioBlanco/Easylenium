@@ -44,7 +44,7 @@ public class TestCaseData implements Validate{
 		try {
 			Class.forName(dataClassName);
 		} catch (ClassNotFoundException e) {
-			throw new RequirementException(e, "The class '%s' not exists or not find in the classpath.", className);
+			throw new RequirementException(e, "The class '%s' not exists or not find in the classpath of JVM.", className);
 		}		
 	}
 
@@ -61,7 +61,7 @@ public class TestCaseData implements Validate{
 			templates.put(node.getId(), testCase);
 		}
 		
-		for(TestCaseNode node: rootNode.getChildrenNodesWithoutAttributeTemplate()){
+		for(TestCaseNode node: rootNode.getChildrenNodesWithAttributeTemplate()){
 			TestCase<?> testCase = new TestCase(executorClass(), dataClass(), getId(), node, templates.get(node.getId()));
 			
 			cases.add(testCase);
@@ -73,6 +73,7 @@ public class TestCaseData implements Validate{
 
 	private Class<?> executorClass() {
 		validateClassName(executorClassName);
+		
 		try {
 			return Class.forName(executorClassName);
 		} catch (ClassNotFoundException e) { 
