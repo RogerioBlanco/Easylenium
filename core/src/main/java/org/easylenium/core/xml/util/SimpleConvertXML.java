@@ -20,7 +20,7 @@ public class SimpleConvertXML {
 		} catch (ValueRequiredException ex) {
 			throw new RuntimeException(ex);
 		} catch (Exception e) {
-			throw new ConvertNodeToPojoException("It was not possible to convert the node to pojo.");
+			throw new ConvertNodeToPojoException("It wasn't possible to convert the node to POJO.");
 		}
 	}
 
@@ -41,7 +41,7 @@ public class SimpleConvertXML {
 			return target;
 
 		} catch (Exception e) {
-			throw new ClonePropertiesException(e, "It was not possible to clone the properties", dataClass);
+			throw new ClonePropertiesException(e, "It wasn't possible to clone the properties", dataClass);
 		}
 	}
 

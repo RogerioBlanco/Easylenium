@@ -12,7 +12,7 @@ public class Table<ROW, COLUMN, VALUE> {
 	}
 
 	public void put(ROW row, COLUMN column, VALUE value) {
-		table.put(new Key<ROW, COLUMN>(row, column), value);
+		put(new Key<ROW, COLUMN>(row, column), value);
 	}
 
 	public VALUE get(ROW row, COLUMN column) {

@@ -42,7 +42,7 @@ public class TestCaseData implements Validate{
 	
 	private void validateClassName(String className){
 		try {
-			Class.forName(dataClassName);
+			Class.forName(className);
 		} catch (ClassNotFoundException e) {
 			throw new RequirementException(e, "The class '%s' not exists or not find in the classpath of JVM.", className);
 		}		

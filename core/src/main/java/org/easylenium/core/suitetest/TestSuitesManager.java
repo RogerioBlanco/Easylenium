@@ -9,6 +9,7 @@ import org.easylenium.core.file.ParseFile;
 import org.easylenium.core.file.exception.ParseFileToDocumentException;
 import org.easylenium.core.suitetest.xml.SuiteTestRootNode;
 import org.easylenium.core.testcase.TestCase;
+import org.easylenium.core.testcase.executor.FactoryExecutor;
 import org.easylenium.core.util.Table;
 import org.easylenium.core.xml.RootNode;
 import org.xml.sax.SAXException;
@@ -21,9 +22,12 @@ public class TestSuitesManager {
 
 	private Table<String, String, TestCase<?>> table;
 
-	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table) {
+	private FactoryExecutor factory;
+
+	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table, FactoryExecutor factory) {
 		this.path = path;
 		this.table = table;
+		this.factory = factory;
 	}
 
 	public Collection<TestSuite> createAllTestsSuites() {
@@ -32,14 +36,15 @@ public class TestSuitesManager {
 		
 		for(File file : files){
 			try {
-				SuiteTestRootNode rootNode = new SuiteTestRootNode(new RootNode(new ParseFile(file).toDocument()));
+				SuiteTestRootNode rootNode = new SuiteTestRootNode(file, new RootNode(new ParseFile(file).toDocument()));
 				
-				SuiteTest suiteTest = new SuiteTest(rootNode, table);
-				
-				suiteTest.validate(file);
-				
-				testsSuites.add(suiteTest.toTestSuite());
-				
+				if(rootNode.isActive()) {
+					SuiteTest suiteTest = new SuiteTest(rootNode, table, factory);
+					
+					suiteTest.validate();
+					
+					testsSuites.add(suiteTest.toTestSuite());
+				}
 			} catch (SAXException e) {
 				throw new ParseFileToDocumentException(file, e);
 			}

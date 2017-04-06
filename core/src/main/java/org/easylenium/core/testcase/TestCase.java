@@ -1,6 +1,7 @@
 package org.easylenium.core.testcase;
 
 import org.easylenium.core.testcase.executor.Executor;
+import org.easylenium.core.testcase.executor.ExecutorAbstract;
 import org.easylenium.core.testcase.executor.FactoryExecutor;
 import org.easylenium.core.testcase.xml.TestCaseNode;
 import org.easylenium.core.util.Key;
@@ -12,17 +13,17 @@ public class TestCase<T>  {
 
 	private TestCaseNode node;
 
-	private Class<? extends Executor<T>> executorClass;
+	private Class<? extends ExecutorAbstract<T>> executorClass;
 	
 	private T data;
 	
-	public TestCase(Class<? extends Executor<T>> executorClass, Class<?> dataClass, String parentKey, TestCaseNode node) {
+	public TestCase(Class<? extends ExecutorAbstract<T>> executorClass, Class<?> dataClass, String parentKey, TestCaseNode node) {
 		this.executorClass = executorClass;
 		this.parentKey = parentKey;
 		this.data = newData(dataClass, node);
 	}
 
-	public TestCase(Class<? extends Executor<T>> executorClass, Class<?> dataClass, String parentKey, TestCaseNode node, TestCase<T> template) {
+	public TestCase(Class<? extends ExecutorAbstract<T>> executorClass, Class<?> dataClass, String parentKey, TestCaseNode node, TestCase<T> template) {
 		this(executorClass, dataClass, parentKey, node);
 		this.data = newData(dataClass, node, template.data);
 	}
@@ -33,11 +34,11 @@ public class TestCase<T>  {
 
 	@SuppressWarnings("unchecked")
 	public void executeExecutor(FactoryExecutor factory){
-		Executor<T> executor = (Executor<T>) factory.newExecutor(executorClass);
-//		Executor<T> executor = (Executor<T>) newExecutor(executorClass, page);
-		executor.execute(data);
+		ExecutorAbstract<T> executor = (ExecutorAbstract<T>) factory.newExecutor(executorClass, data);
+
+		executor.execute();
 		
-		executor.validate(data);
+		executor.validate();
 	}
 	
 //	private Executor<?> newExecutor(Class<? extends Executor<T>> executorClass, Page page) {
