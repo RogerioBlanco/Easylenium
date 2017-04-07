@@ -3,10 +3,10 @@ package org.easylenium.core.suitetest;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
 import org.easylenium.core.suitetest.xml.SuiteTestRootNode;
 import org.easylenium.core.testcase.TestCase;
-import org.easylenium.core.testcase.executor.FactoryExecutor;
 import org.easylenium.core.util.Table;
 
 import junit.framework.TestSuite;

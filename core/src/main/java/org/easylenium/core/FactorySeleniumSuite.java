@@ -2,11 +2,11 @@ package org.easylenium.core;
 
 import java.util.Collection;
 
+import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.settings.Settings;
 import org.easylenium.core.suitetest.TestSuitesManager;
 import org.easylenium.core.testcase.TestCase;
 import org.easylenium.core.testcase.TestCaseDataManager;
-import org.easylenium.core.testcase.executor.FactoryExecutor;
 import org.easylenium.core.util.Table;
 
 import junit.framework.TestSuite;

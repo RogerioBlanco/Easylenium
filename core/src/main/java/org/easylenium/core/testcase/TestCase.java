@@ -1,8 +1,6 @@
 package org.easylenium.core.testcase;
 
-import org.easylenium.core.testcase.executor.Executor;
-import org.easylenium.core.testcase.executor.ExecutorAbstract;
-import org.easylenium.core.testcase.executor.FactoryExecutor;
+import org.easylenium.core.executor.ExecutorAbstract;
 import org.easylenium.core.testcase.xml.TestCaseNode;
 import org.easylenium.core.util.Key;
 import org.easylenium.core.xml.util.SimpleConvertXML;
@@ -33,23 +31,6 @@ public class TestCase<T>  {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void executeExecutor(FactoryExecutor factory){
-		ExecutorAbstract<T> executor = (ExecutorAbstract<T>) factory.newExecutor(executorClass, data);
-
-		executor.execute();
-		
-		executor.validate();
-	}
-	
-//	private Executor<?> newExecutor(Class<? extends Executor<T>> executorClass, Page page) {
-//		try {
-//			return executorClass.getDeclaredConstructor(Page.class).newInstance(page);
-//		} catch (Exception e) {
-//			throw new InstantiateExecutorException("It was not possible instantiate an object of class " + executorClass.getName());
-//		}
-//	}
-
-	@SuppressWarnings("unchecked")
 	private T newData(Class<?> dataClass, TestCaseNode node){
 		return new SimpleConvertXML().convert((Class<? extends T>) dataClass, node.toString());
 	}
@@ -57,6 +38,14 @@ public class TestCase<T>  {
 	@SuppressWarnings("unchecked")
 	private T newData(Class<?> dataClass, TestCaseNode node, T template){
 		return new SimpleConvertXML().convert((Class<? extends T>) dataClass, node.toString(), template);
+	}
+	
+	public T getData() {
+		return data;
+	}
+	
+	public Class<? extends ExecutorAbstract<T>> getExecutorClass() {
+		return executorClass;
 	}
 	
 }

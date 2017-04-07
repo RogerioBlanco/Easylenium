@@ -1,6 +1,4 @@
-package org.easylenium.core.testcase.executor;
-
-import org.easylenium.core.testcase.executor.exception.TimeoutException;
+package org.easylenium.core.executor.exception;
 
 public class TimeoutWaitingException extends TimeoutException {
 

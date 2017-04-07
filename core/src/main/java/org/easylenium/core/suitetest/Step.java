@@ -1,11 +1,15 @@
 package org.easylenium.core.suitetest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.easylenium.core.executor.Executor;
+import org.easylenium.core.executor.FactoryExecutor;
+import org.easylenium.core.executor.exception.ExpectedException;
+import org.easylenium.core.executor.exception.TimeoutException;
+import org.easylenium.core.executor.exception.TimeoutWaitingException;
+import org.easylenium.core.executor.exception.ValidateTestCaseException;
 import org.easylenium.core.suitetest.exception.ReferenceException;
 import org.easylenium.core.suitetest.xml.StepNode;
 import org.easylenium.core.testcase.TestCase;
-import org.easylenium.core.testcase.executor.Executor;
-import org.easylenium.core.testcase.executor.FactoryExecutor;
 import org.easylenium.core.util.Table;
 import org.easylenium.core.xml.exception.RequirementException;
 
@@ -28,6 +32,7 @@ public class Step {
 		validate();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void validate() {
 		if(!stepNode.isExecutor()) {
 			testCase = validateNameReference(stepNode.getName(), stepNode.getReference());
@@ -54,16 +59,18 @@ public class Step {
 		}		
 	}
 
-	public void execute() {
+	public void execute() throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException{
+		Executor executor = null;
+		
 		if(!stepNode.isExecutor()) {
-			testCase.executeExecutor(factory);
+			executor = factory.newExecutor(testCase.getExecutorClass(), testCase.getData());
 		} else {
-			Executor executor = factory.newExecutor(executorClass, null);
-			
-			executor.execute();
-			
-			executor.validate();
+			executor = factory.newExecutor(executorClass, null);
 		}
+		
+		executor.execute();
+		
+		executor.validate();
 	}
 	
 }

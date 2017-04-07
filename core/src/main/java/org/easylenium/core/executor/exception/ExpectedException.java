@@ -1,4 +1,4 @@
-package org.easylenium.core.testcase.executor.exception;
+package org.easylenium.core.executor.exception;
 
 public class ExpectedException extends RuntimeException {
 

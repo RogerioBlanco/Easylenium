@@ -3,11 +3,11 @@ package org.easylenium.core.suitetest;
 import java.util.Collections;
 import java.util.List;
 
+import org.easylenium.core.executor.FactoryExecutor;
+import org.easylenium.core.executor.exception.ExpectedException;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
 import org.easylenium.core.suitetest.xml.StepNode;
 import org.easylenium.core.testcase.TestCase;
-import org.easylenium.core.testcase.executor.FactoryExecutor;
-import org.easylenium.core.testcase.executor.exception.ExpectedException;
 import org.easylenium.core.util.Table;
 
 import junit.framework.Test;

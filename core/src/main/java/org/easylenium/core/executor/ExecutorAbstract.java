@@ -1,10 +1,10 @@
-package org.easylenium.core.testcase.executor;
+package org.easylenium.core.executor;
 
 public abstract class ExecutorAbstract<T> implements Executor {
 
 	public T data;
 
-	private ExecutorAbstract(T data){
+	public ExecutorAbstract(T data){
 		this.data = data;
 	}
 

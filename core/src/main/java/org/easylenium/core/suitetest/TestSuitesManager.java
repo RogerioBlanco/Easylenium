@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.file.LoadFiles;
 import org.easylenium.core.file.ParseFile;
 import org.easylenium.core.file.exception.ParseFileToDocumentException;
 import org.easylenium.core.suitetest.xml.SuiteTestRootNode;
 import org.easylenium.core.testcase.TestCase;
-import org.easylenium.core.testcase.executor.FactoryExecutor;
 import org.easylenium.core.util.Table;
 import org.easylenium.core.xml.RootNode;
 import org.xml.sax.SAXException;
