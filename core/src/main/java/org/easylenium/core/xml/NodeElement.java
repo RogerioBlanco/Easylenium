@@ -1,7 +1,7 @@
 package org.easylenium.core.xml;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,7 +32,7 @@ public class NodeElement {
 	}
 
 	public Collection<NodeElement> getChildrenNodes() {
-		Collection<NodeElement> list = Collections.emptyList();
+		Collection<NodeElement> list = new ArrayList();
 		
 		NodeList childNodes = getElement().getChildNodes();
 		for (int index = 0; index < childNodes.getLength(); index++) {

@@ -16,7 +16,7 @@ import junit.framework.TestSuite;
  * @author rogerionunes
  *
  */
-public class FactorySeleniumSuite {
+public class FactoryMainCore {
 
 	public static TestSuite builder(Settings settings, FactoryExecutor factory) {
 		

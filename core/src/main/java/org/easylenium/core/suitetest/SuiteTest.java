@@ -1,7 +1,7 @@
 package org.easylenium.core.suitetest;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
@@ -36,7 +36,7 @@ public class SuiteTest {
 	}
 
 	private Collection<Scenario> loadScenarios(Table<String, String, TestCase<?>> table, FactoryExecutor factory) {
-		Collection<Scenario> scenarios = Collections.emptyList();
+		Collection<Scenario> scenarios = new ArrayList();
 		
 		for(ScenarioNode node : rootNode.getScenariosNodes()){
 			if(node.isActive()){

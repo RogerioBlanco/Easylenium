@@ -1,8 +1,8 @@
 package org.easylenium.core.suitetest.xml;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.easylenium.core.xml.NodeElement;
 import org.easylenium.core.xml.RootNode;
@@ -31,7 +31,7 @@ public class SuiteTestRootNode {
 	}
 
 	private Collection<ScenarioNode> readChildrenNodes() {
-		Collection<ScenarioNode> list = Collections.emptyList();
+		Collection<ScenarioNode> list = new ArrayList();
 		
 		for(NodeElement node : rootNode.getChildrenNodes()){
 			

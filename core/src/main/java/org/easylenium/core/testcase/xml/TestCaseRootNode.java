@@ -1,8 +1,8 @@
 package org.easylenium.core.testcase.xml;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.easylenium.core.util.IPredicate;
 import org.easylenium.core.util.Predicate;
@@ -41,7 +41,7 @@ public class TestCaseRootNode {
 	}
 	
 	private Collection<TestCaseNode> readChildrenNodes() {
-		Collection<TestCaseNode> list = Collections.emptyList();
+		Collection<TestCaseNode> list = new ArrayList();
 		
 		for(NodeElement node : rootNode.getChildrenNodes()){
 			

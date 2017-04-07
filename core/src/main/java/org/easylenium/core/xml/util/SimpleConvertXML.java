@@ -1,9 +1,9 @@
 package org.easylenium.core.xml.util;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.easylenium.core.xml.exception.ConvertNodeToPojoException;
@@ -46,7 +46,7 @@ public class SimpleConvertXML {
 	}
 
 	private Collection<Field> getInheritedFields(Class<?> clazz) {
-		Collection<Field> fields = Collections.emptyList();
+		Collection<Field> fields = new ArrayList();
 
 		for (Class<?> c = clazz; c != null; c = c.getSuperclass())
 			fields.addAll(Arrays.asList(c.getDeclaredFields()));

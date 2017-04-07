@@ -1,7 +1,7 @@
 package org.easylenium.core.suitetest.xml;
 
 import java.io.File;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.easylenium.core.xml.NodeElement;
@@ -30,7 +30,7 @@ public class ScenarioNode {
 	}
 
 	private List<StepNode> readChildrenNodes() {
-		List<StepNode> list = Collections.emptyList();
+		List<StepNode> list = new ArrayList();
 		
 		for(NodeElement node : rootNode.getChildrenNodes()){
 			StepNode stepNode = new StepNode(node);

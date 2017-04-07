@@ -1,8 +1,8 @@
 package org.easylenium.core.suitetest;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.file.LoadFiles;
@@ -31,7 +31,7 @@ public class TestSuitesManager {
 	}
 
 	public Collection<TestSuite> createAllTestsSuites() {
-		Collection<TestSuite> testsSuites = Collections.emptyList();
+		Collection<TestSuite> testsSuites = new ArrayList();
 		Collection<File> files = new LoadFiles(path).loadRecursively();
 		
 		for(File file : files){

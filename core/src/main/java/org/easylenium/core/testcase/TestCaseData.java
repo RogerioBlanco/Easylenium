@@ -1,8 +1,8 @@
 package org.easylenium.core.testcase;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +50,7 @@ public class TestCaseData implements Validate{
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Collection<TestCase<?>> getTestsCases() {
-		Collection<TestCase<?>> cases = Collections.emptyList();
+		Collection<TestCase<?>> cases = new ArrayList();
 		Map<String, TestCase<?>> templates = new HashMap<String, TestCase<?>>();
 		
 		for (TestCaseNode node : rootNode.getChildrenNodesWithoutAttributeTemplate()) {

@@ -1,8 +1,9 @@
 package org.easylenium.core.suitetest;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.executor.exception.ExpectedException;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
@@ -30,7 +31,7 @@ public class Scenario {
 	}
 
 	private List<Step> loadSteps() {
-		List<Step> steps = Collections.emptyList();
+		List<Step> steps = new ArrayList();
 		
 		for(StepNode stepNode :  node.getStepsNodes()) 
 			steps.add(new Step(table, stepNode, factory));
@@ -51,16 +52,20 @@ public class Scenario {
 	
 	private static class ScenarioTestCase extends junit.framework.TestCase {
 
-		private String description;
 		
 		private List<Step> steps;
 
 		public ScenarioTestCase(String name, String description, List<Step> steps) {
-			super(name);
-			this.description = description;
 			this.steps = steps;
+			setName(name, description);
 		}
-
+		
+		private void setName(String name, String description){
+			if(StringUtils.isNotBlank(description))
+				name = name.concat(" - ").concat(description);
+			setName(name);
+		}
+		
 		protected void runTest() throws Throwable {
 			try {
 				for(Step step : steps) {
@@ -69,7 +74,6 @@ public class Scenario {
 			} catch (ExpectedException expectedException) {
 				
 			} catch (Throwable throwable) {
-				
 				throw throwable;
 			}
 		}
