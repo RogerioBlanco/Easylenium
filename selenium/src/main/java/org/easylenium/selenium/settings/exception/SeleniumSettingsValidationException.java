@@ -1,4 +1,4 @@
-package org.easyleniu.selenium.settings.exception;
+package org.easylenium.selenium.settings.exception;
 
 import java.text.RuleBasedCollator;
 

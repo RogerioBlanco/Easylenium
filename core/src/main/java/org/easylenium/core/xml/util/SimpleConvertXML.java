@@ -16,7 +16,7 @@ public class SimpleConvertXML {
 
 	public <T> T convert(Class<? extends T> dataClass, String source) {
 		try {
-			return PERSISTER.read(dataClass, source);
+			return PERSISTER.read(dataClass, source, Boolean.FALSE);
 		} catch (ValueRequiredException ex) {
 			throw new RuntimeException(ex);
 		} catch (Exception e) {

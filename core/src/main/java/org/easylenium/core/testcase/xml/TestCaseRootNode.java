@@ -72,5 +72,10 @@ public class TestCaseRootNode {
 			return !node.hasTemplate();
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return rootNode.toString();
+	}
 
 }

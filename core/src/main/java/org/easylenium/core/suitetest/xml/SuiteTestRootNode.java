@@ -67,5 +67,10 @@ public class SuiteTestRootNode {
 	public Collection<ScenarioNode> getScenariosNodes() {
 		return scenariosNodes;
 	}
+	
+	@Override
+	public String toString() {
+		return rootNode.toString();
+	}
 
 }

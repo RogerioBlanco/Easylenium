@@ -1,6 +1,6 @@
-package org.easyleniu.selenium.page.search;
+package org.easylenium.selenium.page.search;
 
-import org.easyleniu.selenium.page.Page;
+import org.easylenium.selenium.page.Page;
 
 public class SearchIdElement {
 

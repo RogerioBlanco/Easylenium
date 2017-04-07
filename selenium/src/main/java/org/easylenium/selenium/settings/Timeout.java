@@ -1,4 +1,4 @@
-package org.easyleniu.selenium.settings;
+package org.easylenium.selenium.settings;
 
 import java.util.concurrent.TimeUnit;
 

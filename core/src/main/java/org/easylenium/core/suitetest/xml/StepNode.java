@@ -60,4 +60,8 @@ public class StepNode {
 		return StringUtils.isNotBlank(getExecutor());
 	}
 	
+	@Override
+	public String toString() {
+		return node.toString();
+	}
 }

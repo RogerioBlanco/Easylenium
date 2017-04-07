@@ -64,4 +64,9 @@ public class ScenarioNode {
 	public List<StepNode> getStepsNodes() {
 		return stepsNodes;
 	}
+	
+	@Override
+	public String toString() {
+		return rootNode.toString();
+	}
 }

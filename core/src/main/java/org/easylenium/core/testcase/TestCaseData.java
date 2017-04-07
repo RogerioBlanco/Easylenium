@@ -27,9 +27,9 @@ public class TestCaseData implements Validate{
 		
 		this.rootNode = rootNode;
 
-		executorClassName = rootNode.getExecutorClass();
+		this.executorClassName = rootNode.getExecutorClass();
 
-		dataClassName = rootNode.getDataClass();
+		this.dataClassName = rootNode.getDataClass();
 	}
 
 	public void validate() {

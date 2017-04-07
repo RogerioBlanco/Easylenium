@@ -3,6 +3,7 @@ package org.easylenium.core.xml;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.easylenium.core.xml.util.ConvertNodeIntoString;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,8 +13,12 @@ public class RootNode {
 
 	private Document document;
 
+	private String text = "RootNode";
+	
 	public RootNode(Document document) {
 		this.document = document;
+		if(isElementNode())
+			this.text = new ConvertNodeIntoString(getElement()).doIt();
 	}
 
 	public String getAttribute(String name) {
@@ -40,6 +45,11 @@ public class RootNode {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public String toString() {
+		return text;
 	}
 
 }

@@ -1,11 +1,11 @@
-package org.easyleniu.selenium.settings;
+package org.easylenium.selenium.settings;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.easyleniu.selenium.settings.exception.SeleniumSettingsValidationException;
 import org.easylenium.core.settings.Settings;
+import org.easylenium.selenium.settings.exception.SeleniumSettingsValidationException;
 
 public class SeleniumSettings extends Settings {
 

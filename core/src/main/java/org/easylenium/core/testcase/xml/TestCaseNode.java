@@ -5,7 +5,6 @@ import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.xml.NodeElement;
 import org.easylenium.core.xml.exception.RequirementException;
 import org.easylenium.core.xml.exception.TagUnequalsException;
-import org.easylenium.core.xml.util.ConvertNodeIntoString;
 import org.w3c.dom.Element;
 
 public class TestCaseNode implements Validate {
@@ -49,7 +48,7 @@ public class TestCaseNode implements Validate {
 	
 	@Override
 	public String toString() {
-		return new ConvertNodeIntoString(node.getElement()).doIt();
+		return node.toString();
 	}
 
 	

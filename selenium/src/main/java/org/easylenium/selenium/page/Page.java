@@ -1,7 +1,7 @@
-package org.easyleniu.selenium.page;
+package org.easylenium.selenium.page;
 
-import org.easyleniu.selenium.page.search.SearchIdElement;
-import org.easyleniu.selenium.settings.SeleniumSettings;
+import org.easylenium.selenium.page.search.SearchIdElement;
+import org.easylenium.selenium.settings.SeleniumSettings;
 import org.openqa.selenium.WebDriver;
 
 public class Page{
