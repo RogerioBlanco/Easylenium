@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
-import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.testcase.xml.TestCaseNode;
 import org.easylenium.core.testcase.xml.TestCaseRootNode;
 import org.easylenium.core.xml.exception.RequirementException;
 
-public class TestCaseData implements Validate{
+public class TestCaseData
+{
 
 	private TestCaseRootNode rootNode;
 
@@ -22,9 +22,10 @@ public class TestCaseData implements Validate{
 
 	private String dataClassName;
 
-	public TestCaseData(File file, TestCaseRootNode rootNode) {
+	public TestCaseData(File file, TestCaseRootNode rootNode)
+	{
 		this.file = file;
-		
+
 		this.rootNode = rootNode;
 
 		this.executorClassName = rootNode.getExecutorClass();
@@ -32,66 +33,79 @@ public class TestCaseData implements Validate{
 		this.dataClassName = rootNode.getDataClass();
 	}
 
-	public void validate() {
+	public void validate()
+	{
 		rootNode.validate(file);
-		
+
 		validateClassName(executorClassName);
 
 		validateClassName(dataClassName);
 	}
-	
-	private void validateClassName(String className){
-		try {
+
+	private void validateClassName(String className)
+	{
+		try
+		{
 			Class.forName(className);
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e)
+		{
 			throw new RequirementException(e, "The class '%s' not exists or not find in the classpath of JVM.", className);
-		}		
+		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Collection<TestCase<?>> getTestsCases() {
+	public Collection<TestCase<?>> getTestsCases()
+	{
 		Collection<TestCase<?>> cases = new ArrayList();
 		Map<String, TestCase<?>> templates = new HashMap<String, TestCase<?>>();
-		
-		for (TestCaseNode node : rootNode.getChildrenNodesWithoutAttributeTemplate()) {
+
+		for (TestCaseNode node : rootNode.getChildrenNodesWithoutAttributeTemplate())
+		{
 			TestCase<?> testCase = new TestCase(executorClass(), dataClass(), getId(), node);
-			
+
 			cases.add(testCase);
-			
+
 			templates.put(node.getId(), testCase);
 		}
-		
-		for(TestCaseNode node: rootNode.getChildrenNodesWithAttributeTemplate()){
+
+		for (TestCaseNode node : rootNode.getChildrenNodesWithAttributeTemplate())
+		{
 			TestCase<?> testCase = new TestCase(executorClass(), dataClass(), getId(), node, templates.get(node.getId()));
-			
+
 			cases.add(testCase);
 		}
-		
+
 		return cases;
 	}
 
-
-	private Class<?> executorClass() {
+	private Class<?> executorClass()
+	{
 		validateClassName(executorClassName);
-		
-		try {
+
+		try
+		{
 			return Class.forName(executorClassName);
-		} catch (ClassNotFoundException e) { 
-			throw new RuntimeException(e);/*ignored because has been validated*/
-		}
-	}
-	
-	private Class<?> dataClass() {
-		validateClassName(dataClassName);
-		
-		try {
-			return Class.forName(dataClassName);
-		} catch (ClassNotFoundException e) { 
-			throw new RuntimeException(e);/*ignored because has been validated*/
+		} catch (ClassNotFoundException e)
+		{
+			throw new RuntimeException(e);/* ignored because has been validated */
 		}
 	}
 
-	public String getId() {
+	private Class<?> dataClass()
+	{
+		validateClassName(dataClassName);
+
+		try
+		{
+			return Class.forName(dataClassName);
+		} catch (ClassNotFoundException e)
+		{
+			throw new RuntimeException(e);/* ignored because has been validated */
+		}
+	}
+
+	public String getId()
+	{
 		return FilenameUtils.removeExtension(file.getName());
 	}
 }

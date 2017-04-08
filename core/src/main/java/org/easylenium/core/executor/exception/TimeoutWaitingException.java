@@ -1,27 +1,32 @@
 package org.easylenium.core.executor.exception;
 
-public class TimeoutWaitingException extends TimeoutException {
+public class TimeoutWaitingException extends TimeoutException
+{
 
 	private static final long serialVersionUID = -380681833989108925L;
 
-	public TimeoutWaitingException() {
+	public TimeoutWaitingException()
+	{
 		super();
 	}
 
-	public TimeoutWaitingException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
+	public TimeoutWaitingException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
-	public TimeoutWaitingException(String message, Throwable cause) {
+	public TimeoutWaitingException(String message, Throwable cause)
+	{
 		super(message, cause);
 	}
 
-	public TimeoutWaitingException(String message) {
+	public TimeoutWaitingException(String message)
+	{
 		super(message);
 	}
 
-	public TimeoutWaitingException(Throwable cause) {
+	public TimeoutWaitingException(Throwable cause)
+	{
 		super(cause);
 	}
 

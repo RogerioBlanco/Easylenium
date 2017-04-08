@@ -4,7 +4,6 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
 import org.apache.commons.lang3.StringUtils;
-import org.easylenium.core.interfaces.Validate;
 import org.easylenium.core.settings.exception.SettingsValidationException;
 
 /**
@@ -15,7 +14,8 @@ import org.easylenium.core.settings.exception.SettingsValidationException;
  * @author rogerionunes
  *
  */
-public class Settings implements Validate {
+public class Settings
+{
 
 	private String projectName;
 
@@ -23,7 +23,8 @@ public class Settings implements Validate {
 
 	private String pathTestsCases;
 
-	public void validate() {
+	public void validate()
+	{
 		if (StringUtils.isEmpty(projectName))
 			throw new SettingsValidationException("The name of project does not can be empty.");
 
@@ -34,40 +35,50 @@ public class Settings implements Validate {
 			throw new SettingsValidationException("The directory path of test cases must be valid.");
 	}
 
-	private boolean validPath(String path) {
+	private boolean validPath(String path)
+	{
 
-		try {
+		try
+		{
 			Paths.get(path);
-		} catch (InvalidPathException e) {
+		} catch (InvalidPathException e)
+		{
 			return Boolean.FALSE;
-		} catch (NullPointerException e) {
+		} catch (NullPointerException e)
+		{
 			return Boolean.FALSE;
 		}
 
 		return Boolean.TRUE;
 	}
 
-	public String getProjectName() {
+	public String getProjectName()
+	{
 		return projectName;
 	}
 
-	public void setProjectName(String projectName) {
+	public void setProjectName(String projectName)
+	{
 		this.projectName = projectName;
 	}
 
-	public String getPathTestsSuites() {
+	public String getPathTestsSuites()
+	{
 		return pathTestsSuites;
 	}
 
-	public void setPathTestsSuites(String pathTestsSuites) {
+	public void setPathTestsSuites(String pathTestsSuites)
+	{
 		this.pathTestsSuites = pathTestsSuites;
 	}
 
-	public String getPathTestsCases() {
+	public String getPathTestsCases()
+	{
 		return pathTestsCases;
 	}
 
-	public void setPathTestsCases(String pathTestsCases) {
+	public void setPathTestsCases(String pathTestsCases)
+	{
 		this.pathTestsCases = pathTestsCases;
 	}
 

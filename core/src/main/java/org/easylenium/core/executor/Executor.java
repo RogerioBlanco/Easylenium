@@ -5,7 +5,8 @@ import org.easylenium.core.executor.exception.TimeoutException;
 import org.easylenium.core.executor.exception.TimeoutWaitingException;
 import org.easylenium.core.executor.exception.ValidateTestCaseException;
 
-public interface Executor {
+public interface Executor
+{
 
 	public void execute() throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException;
 

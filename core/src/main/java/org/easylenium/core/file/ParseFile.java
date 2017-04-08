@@ -11,32 +11,40 @@ import org.easylenium.core.file.exception.ParseFileToDocumentException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-public class ParseFile {
+public class ParseFile
+{
 
 	private final static DocumentBuilder DOCUMENT_BUILDER = documentBuilder();
 
 	private File file;
 
-	public ParseFile(File file) {
+	public ParseFile(File file)
+	{
 		this.file = file;
 	}
 
-	private final static DocumentBuilder documentBuilder() {
-		try {
+	private final static DocumentBuilder documentBuilder()
+	{
+		try
+		{
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
+		} catch (ParserConfigurationException e)
+		{
 			throw new ParseFileToDocumentException("Error in configuration of the parse", e);
 		}
 	}
 
-	public Document toDocument() throws SAXException {
-		try {
+	public Document toDocument() throws SAXException
+	{
+		try
+		{
 			Document document = DOCUMENT_BUILDER.parse(file);
-			
+
 			document.normalize();
-			
+
 			return document;
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 			throw new ParseFileToDocumentException("Error to load the file.", e);
 		}
 	}

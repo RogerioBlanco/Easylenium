@@ -16,7 +16,8 @@ import org.xml.sax.SAXException;
 
 import junit.framework.TestSuite;
 
-public class TestSuitesManager {
+public class TestSuitesManager
+{
 
 	private String path;
 
@@ -24,32 +25,39 @@ public class TestSuitesManager {
 
 	private FactoryExecutor factory;
 
-	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table, FactoryExecutor factory) {
+	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table, FactoryExecutor factory)
+	{
 		this.path = path;
 		this.table = table;
 		this.factory = factory;
 	}
 
-	public Collection<TestSuite> createAllTestsSuites() {
-		Collection<TestSuite> testsSuites = new ArrayList();
+	public Collection<TestSuite> createAllTestsSuites()
+	{
+		Collection<TestSuite> testsSuites = new ArrayList<TestSuite>();
+
 		Collection<File> files = new LoadFiles(path).loadRecursively();
-		
-		for(File file : files){
-			try {
+
+		for (File file : files)
+		{
+			try
+			{
 				SuiteTestRootNode rootNode = new SuiteTestRootNode(file, new RootNode(new ParseFile(file).toDocument()));
-				
-				if(rootNode.isActive()) {
+
+				if (rootNode.isActive())
+				{
 					SuiteTest suiteTest = new SuiteTest(rootNode, table, factory);
-					
+
 					suiteTest.validate();
-					
+
 					testsSuites.add(suiteTest.toTestSuite());
 				}
-			} catch (SAXException e) {
+			} catch (SAXException e)
+			{
 				throw new ParseFileToDocumentException(file, e);
 			}
 		}
-		
+
 		return testsSuites;
 	}
 

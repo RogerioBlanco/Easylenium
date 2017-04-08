@@ -11,41 +11,48 @@ import org.easylenium.core.util.Table;
 
 import junit.framework.TestSuite;
 
-public class SuiteTest {
+public class SuiteTest
+{
 
 	private SuiteTestRootNode rootNode;
-	
+
 	private Collection<Scenario> scenarios;
 
-	public SuiteTest(SuiteTestRootNode rootNode, Table<String, String, TestCase<?>> table, FactoryExecutor factory) {
+	public SuiteTest(SuiteTestRootNode rootNode, Table<String, String, TestCase<?>> table, FactoryExecutor factory)
+	{
 		this.rootNode = rootNode;
 		this.scenarios = loadScenarios(table, factory);
 	}
 
-	public void validate() {
+	public void validate()
+	{
 		rootNode.validate();
 	}
 
-	public TestSuite toTestSuite() {
+	public TestSuite toTestSuite()
+	{
 		TestSuite testSuite = new TestSuite(rootNode.getName());
-		
-		for(Scenario scenario : scenarios)
+
+		for (Scenario scenario : scenarios)
 			testSuite.addTest(scenario.toTest());
-			
+
 		return testSuite;
 	}
 
-	private Collection<Scenario> loadScenarios(Table<String, String, TestCase<?>> table, FactoryExecutor factory) {
+	private Collection<Scenario> loadScenarios(Table<String, String, TestCase<?>> table, FactoryExecutor factory)
+	{
 		Collection<Scenario> scenarios = new ArrayList();
-		
-		for(ScenarioNode node : rootNode.getScenariosNodes()){
-			if(node.isActive()){
+
+		for (ScenarioNode node : rootNode.getScenariosNodes())
+		{
+			if (node.isActive())
+			{
 				Scenario scenario = new Scenario(node, table, factory);
-			
+
 				scenarios.add(scenario);
 			}
 		}
-		
+
 		return scenarios;
 	}
 }
