@@ -25,6 +25,11 @@ public class InstantiateExecutorException extends RuntimeException
 		super(message);
 	}
 
+	public InstantiateExecutorException(String message, Object... args)
+	{
+		this(String.format(message, args));
+	}
+	
 	public InstantiateExecutorException(Throwable cause)
 	{
 		super(cause);

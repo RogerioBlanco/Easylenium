@@ -2,14 +2,17 @@ package org.easylenium.core;
 
 import java.util.Collection;
 
+import junit.framework.TestSuite;
+
+import org.easylenium.core.custom.Customizer;
+import org.easylenium.core.custom.CustomizerDefault;
 import org.easylenium.core.executor.FactoryExecutor;
+import org.easylenium.core.executor.FactoryExecutorDefault;
 import org.easylenium.core.settings.Settings;
 import org.easylenium.core.suitetest.TestSuitesManager;
 import org.easylenium.core.testcase.TestCase;
 import org.easylenium.core.testcase.TestCaseDataManager;
 import org.easylenium.core.util.Table;
-
-import junit.framework.TestSuite;
 
 /**
  * 
@@ -19,7 +22,17 @@ import junit.framework.TestSuite;
 public class FactoryMainCore
 {
 
+	public static TestSuite builder(Settings settings)
+	{
+		return builder(settings, new FactoryExecutorDefault());
+	}
+
 	public static TestSuite builder(Settings settings, FactoryExecutor factory)
+	{
+		return builder(settings, factory, new CustomizerDefault());
+	}
+
+	public static TestSuite builder(Settings settings, FactoryExecutor factory, Customizer custom)
 	{
 
 		if (settings == null)
@@ -31,7 +44,7 @@ public class FactoryMainCore
 
 		Table<String, String, TestCase<?>> tableTestsCases = new TestCaseDataManager(settings.getPathTestsCases()).setUpAllTestsCases();
 
-		Collection<TestSuite> testsSuites = new TestSuitesManager(settings.getPathTestsSuites(), tableTestsCases, factory).createAllTestsSuites();
+		Collection<TestSuite> testsSuites = new TestSuitesManager(settings.getPathTestsSuites(), tableTestsCases, factory).createAllTestsSuites(custom);
 
 		for (TestSuite test : testsSuites)
 			mainTestSuite.addTest(test);

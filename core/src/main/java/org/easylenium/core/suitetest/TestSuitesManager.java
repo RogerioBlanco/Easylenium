@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.easylenium.core.custom.Customizer;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.file.LoadFiles;
 import org.easylenium.core.file.ParseFile;
@@ -32,7 +33,7 @@ public class TestSuitesManager
 		this.factory = factory;
 	}
 
-	public Collection<TestSuite> createAllTestsSuites()
+	public Collection<TestSuite> createAllTestsSuites(Customizer custom)
 	{
 		Collection<TestSuite> testsSuites = new ArrayList<TestSuite>();
 
@@ -50,7 +51,7 @@ public class TestSuitesManager
 
 					suiteTest.validate();
 
-					testsSuites.add(suiteTest.toTestSuite());
+					testsSuites.add(suiteTest.toTestSuite(custom));
 				}
 			} catch (SAXException e)
 			{

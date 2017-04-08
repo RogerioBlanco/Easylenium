@@ -3,6 +3,7 @@ package org.easylenium.core.suitetest;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.easylenium.core.custom.Customizer;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
 import org.easylenium.core.suitetest.xml.SuiteTestRootNode;
@@ -29,19 +30,19 @@ public class SuiteTest
 		rootNode.validate();
 	}
 
-	public TestSuite toTestSuite()
+	public TestSuite toTestSuite(Customizer custom)
 	{
 		TestSuite testSuite = new TestSuite(rootNode.getName());
 
 		for (Scenario scenario : scenarios)
-			testSuite.addTest(scenario.toTest());
+			testSuite.addTest(scenario.toTest(custom));
 
 		return testSuite;
 	}
 
 	private Collection<Scenario> loadScenarios(Table<String, String, TestCase<?>> table, FactoryExecutor factory)
 	{
-		Collection<Scenario> scenarios = new ArrayList();
+		Collection<Scenario> scenarios = new ArrayList<Scenario>();
 
 		for (ScenarioNode node : rootNode.getScenariosNodes())
 		{
