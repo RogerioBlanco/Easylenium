@@ -1,11 +1,9 @@
 package org.easylenium.core.xml.util;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.easylenium.core.util.InheritedFields;
 import org.easylenium.core.xml.exception.ConvertNodeToPojoException;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.core.ValueRequiredException;
@@ -38,7 +36,7 @@ public class SimpleConvertXML
 			@SuppressWarnings("unchecked")
 			T target = (T) BeanUtils.cloneBean(template);
 
-			for (Field field : getInheritedFields(dataClass))
+			for (Field field : new InheritedFields(dataClass).getAll())
 			{
 				field.setAccessible(true);
 				if (field.get(instance) != null)
