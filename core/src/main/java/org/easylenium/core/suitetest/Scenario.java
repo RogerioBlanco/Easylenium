@@ -3,17 +3,17 @@ package org.easylenium.core.suitetest;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Test;
+
 import org.apache.commons.lang3.StringUtils;
 import org.easylenium.core.constant.Result;
-import org.easylenium.core.custom.Customizer;
+import org.easylenium.core.custom.CustomizerGeneral;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.executor.exception.ExpectedException;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
 import org.easylenium.core.suitetest.xml.StepNode;
 import org.easylenium.core.testcase.TestCase;
 import org.easylenium.core.util.Table;
-
-import junit.framework.Test;
 
 public class Scenario
 {
@@ -26,7 +26,7 @@ public class Scenario
 
 	private FactoryExecutor factory;
 
-	public Scenario(ScenarioNode rootNode, Table<String, String, TestCase<?>> table, FactoryExecutor factory)
+	protected Scenario(ScenarioNode rootNode, Table<String, String, TestCase<?>> table, FactoryExecutor factory)
 	{
 		this.node = rootNode;
 		this.table = table;
@@ -44,28 +44,37 @@ public class Scenario
 		return steps;
 	}
 
-	public void validate()
+	protected void validate()
 	{
 		for (Step step : steps)
 			step.validate();
 	}
 
-	public Test toTest(Customizer custom)
+	protected Test toTest(CustomizerGeneral custom)
 	{
 		return new ScenarioTestCase(node.getName(), node.getDescription(), this, custom);
 	}
 
+	public String getName()
+	{
+		return node.getName();
+	}
+
+	public String getDescription()
+	{
+		return node.getDescription();
+	}
+
 	private static class ScenarioTestCase extends junit.framework.TestCase
 	{
-
-
 		private Scenario scenario;
-		private Customizer custom;
 
-		public ScenarioTestCase(String name, String description, Scenario scenario, Customizer custom)
+		private CustomizerGeneral defaultCustom;
+
+		public ScenarioTestCase(String name, String description, Scenario scenario, CustomizerGeneral custom)
 		{
 			this.scenario = scenario;
-			this.custom = custom;
+			this.defaultCustom = custom;
 			setName(name, description);
 		}
 
@@ -82,31 +91,32 @@ public class Scenario
 			
 			try
 			{
-				custom.before(scenario);
-				
-				for (Step step : scenario.steps) {
-					custom.before(step);
+				defaultCustom.before(scenario);
+
+				for (Step step : scenario.steps)
+				{
+					defaultCustom.before(step);
 					
 					step.execute();
-					
-					custom.after(step);
+
+					defaultCustom.after(step);
 				}
 
-				custom.after(scenario);
-				
+				defaultCustom.after(scenario);
+
 			} catch (ExpectedException expectedException)
 			{
 				result = Result.SUCCESS;
-				
-				custom.expectedException(scenario);
+
+				defaultCustom.expectedException(scenario);
 			} catch (Throwable throwable)
 			{
 				result = Result.FAIL;
-				
+
 				throw throwable;
 			} finally
 			{
-				custom.result(result);
+				defaultCustom.result(result);
 			}
 		}
 	}

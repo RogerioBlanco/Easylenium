@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.easylenium.core.custom.Customizer;
+import org.easylenium.core.custom.CustomizerGeneral;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.file.LoadFiles;
 import org.easylenium.core.file.ParseFile;
@@ -33,7 +33,7 @@ public class TestSuitesManager
 		this.factory = factory;
 	}
 
-	public Collection<TestSuite> createAllTestsSuites(Customizer custom)
+	public Collection<TestSuite> createAllTestsSuites(CustomizerGeneral custom)
 	{
 		Collection<TestSuite> testsSuites = new ArrayList<TestSuite>();
 

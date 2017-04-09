@@ -4,8 +4,9 @@ import org.easylenium.core.constant.Result;
 import org.easylenium.core.suitetest.Scenario;
 import org.easylenium.core.suitetest.Step;
 
-public class CustomizerDefault implements Customizer
+public class CustomizerGeneralDefault implements CustomizerGeneral
 {
+
 	public void before(Scenario scenario)
 	{
 	}
@@ -14,11 +15,11 @@ public class CustomizerDefault implements Customizer
 	{
 	}
 
-	public void before(Step scenario)
+	public void before(Step step)
 	{
 	}
 
-	public void after(Step scenario)
+	public void after(Step step)
 	{
 	}
 
@@ -29,4 +30,5 @@ public class CustomizerDefault implements Customizer
 	public void result(Result result)
 	{
 	}
+
 }

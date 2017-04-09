@@ -3,7 +3,7 @@ package org.easylenium.core.suitetest;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.easylenium.core.custom.Customizer;
+import org.easylenium.core.custom.CustomizerGeneral;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
 import org.easylenium.core.suitetest.xml.SuiteTestRootNode;
@@ -30,7 +30,7 @@ public class SuiteTest
 		rootNode.validate();
 	}
 
-	public TestSuite toTestSuite(Customizer custom)
+	public TestSuite toTestSuite(CustomizerGeneral custom)
 	{
 		TestSuite testSuite = new TestSuite(rootNode.getName());
 

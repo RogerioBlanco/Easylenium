@@ -1,6 +1,8 @@
 package org.easylenium.core.suitetest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.easylenium.core.custom.CustomizerStep;
+import org.easylenium.core.custom.CustomizerStepDefault;
 import org.easylenium.core.executor.Executor;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.executor.exception.ExpectedException;
@@ -26,16 +28,22 @@ public class Step
 
 	private Class<? extends Executor> executorClass;
 
-	public Step(Table<String, String, TestCase<?>> table, StepNode stepNode, FactoryExecutor factory)
+	private Executor executor;
+
+	private CustomizerStep customStep;
+
+	protected Step(Table<String, String, TestCase<?>> table, StepNode stepNode, FactoryExecutor factory)
 	{
 		this.factory = factory;
 		this.table = table;
 		this.stepNode = stepNode;
+		this.executor = newExecutor();
+		this.customStep = newCustomStep();
 		validate();
 	}
 
 	@SuppressWarnings("unchecked")
-	public void validate()
+	protected void validate()
 	{
 		if (!stepNode.isExecutor())
 		{
@@ -69,21 +77,33 @@ public class Step
 		}
 	}
 
-	public void execute() throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException
+	private Executor newExecutor()
 	{
-		Executor executor = null;
-
 		if (!stepNode.isExecutor())
 		{
-			executor = factory.newExecutor(testCase.getExecutorClass(), testCase.getData());
+			return factory.newExecutor(testCase.getExecutorClass(), testCase.getData());
 		} else
 		{
-			executor = factory.newExecutor(executorClass, null);
+			return factory.newExecutor(executorClass, null);
 		}
+	}
 
+	private CustomizerStep newCustomStep()
+	{
+		if (executor instanceof CustomizerStep)
+			return (CustomizerStep) executor;
+
+		return new CustomizerStepDefault();
+	}
+
+	protected void execute() throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException
+	{
+		customStep.before();
+		
 		executor.execute();
 
 		executor.validate();
+		
+		customStep.after();
 	}
-
 }

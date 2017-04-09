@@ -4,8 +4,8 @@ import java.util.Collection;
 
 import junit.framework.TestSuite;
 
-import org.easylenium.core.custom.Customizer;
-import org.easylenium.core.custom.CustomizerDefault;
+import org.easylenium.core.custom.CustomizerGeneral;
+import org.easylenium.core.custom.CustomizerGeneralDefault;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.executor.FactoryExecutorDefault;
 import org.easylenium.core.settings.Settings;
@@ -29,10 +29,10 @@ public class FactoryMainCore
 
 	public static TestSuite builder(Settings settings, FactoryExecutor factory)
 	{
-		return builder(settings, factory, new CustomizerDefault());
+		return builder(settings, factory, new CustomizerGeneralDefault());
 	}
 
-	public static TestSuite builder(Settings settings, FactoryExecutor factory, Customizer custom)
+	public static TestSuite builder(Settings settings, FactoryExecutor factory, CustomizerGeneral custom)
 	{
 
 		if (settings == null)
