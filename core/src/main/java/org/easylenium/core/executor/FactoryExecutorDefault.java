@@ -2,7 +2,6 @@ package org.easylenium.core.executor;
 
 import org.easylenium.core.executor.exception.InstantiateExecutorException;
 
-
 public class FactoryExecutorDefault implements FactoryExecutor
 {
 

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
+import org.easylenium.core.executor.Executor;
 import org.easylenium.core.testcase.xml.TestCaseNode;
 import org.easylenium.core.testcase.xml.TestCaseRootNode;
 import org.easylenium.core.xml.exception.RequirementException;
@@ -78,13 +79,18 @@ public class TestCaseData
 		return cases;
 	}
 
-	private Class<?> executorClass()
+	private Class<? extends Executor> executorClass()
 	{
 		validateClassName(executorClassName);
 
 		try
 		{
-			return Class.forName(executorClassName);
+			Class<?> clazz = Class.forName(executorClassName);
+			
+			if(!Executor.class.isAssignableFrom(clazz))
+				throw new RequirementException("The class '%s' doesn't implements the interface 'org.easylenium.core.executor.Executor'.", executorClassName);
+			
+			return (Class<? extends Executor>) clazz;
 		} catch (ClassNotFoundException e)
 		{
 			throw new RuntimeException(e);/* ignored because has been validated */
