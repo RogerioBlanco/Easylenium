@@ -40,7 +40,7 @@ public class RootNode
 
 	public Collection<NodeElement> getChildrenNodes()
 	{
-		Collection<NodeElement> list = new ArrayList();
+		Collection<NodeElement> list = new ArrayList<NodeElement>();
 
 		NodeList childNodes = getElement().getChildNodes();
 		for (int index = 0; index < childNodes.getLength(); index++)
