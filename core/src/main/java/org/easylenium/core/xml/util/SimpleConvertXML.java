@@ -54,14 +54,4 @@ public class SimpleConvertXML
 			throw new ClonePropertiesException(e, "It wasn't possible to clone the properties", dataClass);
 		}
 	}
-
-	private Collection<Field> getInheritedFields(Class<?> clazz)
-	{
-		Collection<Field> fields = new ArrayList();
-
-		for (Class<?> c = clazz; c != null; c = c.getSuperclass())
-			fields.addAll(Arrays.asList(c.getDeclaredFields()));
-
-		return fields;
-	}
 }
