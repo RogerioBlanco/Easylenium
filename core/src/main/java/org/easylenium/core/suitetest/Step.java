@@ -9,6 +9,7 @@ import org.easylenium.core.executor.exception.ExpectedException;
 import org.easylenium.core.executor.exception.TimeoutException;
 import org.easylenium.core.executor.exception.TimeoutWaitingException;
 import org.easylenium.core.executor.exception.ValidateTestCaseException;
+import org.easylenium.core.flow.InformationFlow;
 import org.easylenium.core.suitetest.exception.ReferenceException;
 import org.easylenium.core.suitetest.xml.StepNode;
 import org.easylenium.core.testcase.TestCase;
@@ -96,8 +97,12 @@ public class Step
 		return new CustomizerStepDefault();
 	}
 
-	protected void execute() throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException
+	protected void execute(InformationFlow informationFlow) throws ValidateTestCaseException, ExpectedException, TimeoutException, TimeoutWaitingException
 	{
+		informationFlow.validateRequired(executor);
+
+		informationFlow.initSetupExecutor(executor);
+		
 		customStep.before();
 		
 		executor.execute();
@@ -105,5 +110,7 @@ public class Step
 		executor.validate();
 		
 		customStep.after();
+		
+		informationFlow.retrieveInformation(executor);
 	}
 }

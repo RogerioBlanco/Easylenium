@@ -10,6 +10,7 @@ import org.easylenium.core.constant.Result;
 import org.easylenium.core.custom.CustomizerGeneral;
 import org.easylenium.core.executor.FactoryExecutor;
 import org.easylenium.core.executor.exception.ExpectedException;
+import org.easylenium.core.flow.InformationFlow;
 import org.easylenium.core.suitetest.xml.ScenarioNode;
 import org.easylenium.core.suitetest.xml.StepNode;
 import org.easylenium.core.testcase.TestCase;
@@ -91,13 +92,15 @@ public class Scenario
 			
 			try
 			{
+				InformationFlow informationFlow = new InformationFlow(scenario);
+
 				defaultCustom.before(scenario);
 
 				for (Step step : scenario.steps)
 				{
 					defaultCustom.before(step);
 					
-					step.execute();
+					step.execute(informationFlow);
 
 					defaultCustom.after(step);
 				}
