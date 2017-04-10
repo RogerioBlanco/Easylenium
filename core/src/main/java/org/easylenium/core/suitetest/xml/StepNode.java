@@ -32,7 +32,7 @@ public class StepNode
 		if (!TAG_NAME.equalsIgnoreCase(node.getElement().getTagName()))
 			throw new TagUnequalsException(defaultError + "The step tag '%s' is not equals to '%s'.", node.getElement().getTagName(), TAG_NAME);
 
-		if (!StringUtils.isNoneBlank(getName(), getReference(), getExecutor()))
+		if (StringUtils.isBlank(getName()) && StringUtils.isBlank(getReference()) && StringUtils.isBlank(getExecutor()))
 			throw new AttributeException(defaultError + "Isn't possible create a step if the attributes '%s', '%s' and '%s' all empty.", ATTR_NAME, ATTR_REFERENCE, ATTR_EXECUTOR);
 
 		if (StringUtils.isNoneBlank(getName(), getReference(), getExecutor()))
