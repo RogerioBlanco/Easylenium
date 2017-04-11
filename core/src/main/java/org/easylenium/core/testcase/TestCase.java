@@ -20,6 +20,7 @@ public class TestCase<T>
 	{
 		this.executorClass = executorClass;
 		this.parentKey = parentKey;
+		this.node = node;
 		this.data = newData(dataClass, node);
 	}
 

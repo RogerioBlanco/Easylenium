@@ -4,8 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.commons.lang3.StringUtils;
 import org.easylenium.core.xml.NodeElement;
 import org.easylenium.core.xml.RootNode;
+import org.easylenium.core.xml.exception.AttributeException;
 import org.easylenium.core.xml.exception.TagUnequalsException;
 
 public class SuiteTestRootNode
@@ -52,6 +54,9 @@ public class SuiteTestRootNode
 		if (!TAG_NAME.equalsIgnoreCase(rootNode.getElement().getTagName()))
 			throw new TagUnequalsException("The root element in the file '%s' is not equals to '%s'.", file.getName(), TAG_NAME);
 
+		if (StringUtils.isBlank(getName()))
+			throw new AttributeException("Isn't possible create suite test of file '%s' if the attribute '%s' is empty.", file.getName(), ATTR_NAME);
+		
 		for (ScenarioNode node : scenariosNodes)
 			node.validate();
 	}

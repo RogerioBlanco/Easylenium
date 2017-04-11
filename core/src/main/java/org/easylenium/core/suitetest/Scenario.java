@@ -3,8 +3,6 @@ package org.easylenium.core.suitetest;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Test;
-
 import org.apache.commons.lang3.StringUtils;
 import org.easylenium.core.constant.Result;
 import org.easylenium.core.custom.CustomizerGeneral;
@@ -15,6 +13,8 @@ import org.easylenium.core.suitetest.xml.ScenarioNode;
 import org.easylenium.core.suitetest.xml.StepNode;
 import org.easylenium.core.testcase.TestCase;
 import org.easylenium.core.util.Table;
+
+import junit.framework.Test;
 
 public class Scenario
 {
@@ -72,18 +72,22 @@ public class Scenario
 
 		private CustomizerGeneral defaultCustom;
 
+		public ScenarioTestCase(String name) {
+			super(name);
+		}
+		
 		public ScenarioTestCase(String name, String description, Scenario scenario, CustomizerGeneral custom)
 		{
+			this(getName(name, description));
 			this.scenario = scenario;
 			this.defaultCustom = custom;
-			setName(name, description);
 		}
 
-		private void setName(String name, String description)
+		private static String getName(String name, String description)
 		{
 			if (StringUtils.isNotBlank(description))
 				name = name.concat(" - ").concat(description);
-			setName(name);
+			return name;
 		}
 
 		protected void runTest() throws Throwable

@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.easylenium.core.xml.NodeElement;
+import org.easylenium.core.xml.exception.AttributeException;
 import org.easylenium.core.xml.exception.TagUnequalsException;
 
 public class ScenarioNode
@@ -51,6 +53,9 @@ public class ScenarioNode
 		if (!TAG_NAME.equalsIgnoreCase(rootNode.getElement().getTagName()))
 			throw new TagUnequalsException("The scenario tag in the file with name '%s' is not equals to '%s'.", file.getName(), TAG_NAME);
 
+		if (StringUtils.isBlank(getName()))
+			throw new AttributeException("Isn't possible create scenario of file '%s' if the attribute '%s' is empty.", file.getName(), ATTR_NAME);
+		
 		for (StepNode node : stepsNodes)
 			node.validade(file, getName());
 	}

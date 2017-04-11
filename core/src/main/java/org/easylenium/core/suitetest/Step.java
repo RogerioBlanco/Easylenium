@@ -38,9 +38,9 @@ public class Step
 		this.factory = factory;
 		this.table = table;
 		this.stepNode = stepNode;
+		validate();
 		this.executor = newExecutor();
 		this.customStep = newCustomStep();
-		validate();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -59,10 +59,8 @@ public class Step
 	private TestCase<?> validateNameReference(String name, String reference)
 	{
 		TestCase<?> testCase = table.get(name, reference);
-		if (!StringUtils.isNoneBlank(name, reference) && testCase == null)
-		{
+		if (!StringUtils.isNoneBlank(name, reference) || testCase == null)
 			throw new ReferenceException("The step with name '%s' and reference '%s' doesn't exist.", stepNode.getName(), stepNode.getReference());
-		}
 
 		return testCase;
 	}
