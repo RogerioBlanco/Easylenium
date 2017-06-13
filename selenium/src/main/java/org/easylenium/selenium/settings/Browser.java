@@ -1,6 +1,11 @@
 package org.easylenium.selenium.settings;
 
-public enum Browser {
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-	FIREFOX//, INTERNET_EXPLORER, SAFARI, OPERA, CHROME;
+public enum Browser
+{
+	FIREFOX{public WebDriver newInstace(){return new FirefoxDriver();}};
+
+	public abstract WebDriver newInstace();
 }

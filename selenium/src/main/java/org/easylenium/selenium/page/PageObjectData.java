@@ -1,10 +1,11 @@
 package org.easylenium.selenium.page;
 
+import static java.lang.String.format;
+
 import java.util.concurrent.TimeUnit;
 
 import org.easylenium.core.executor.ExecutorData;
-import org.easylenium.selenium.page.action.PageActionComplex;
-import org.easylenium.selenium.page.action.PageActionSimple;
+import org.easylenium.selenium.page.action.Actions;
 import org.easylenium.selenium.settings.Timeout;
 import org.easylenium.selenium.util.Wrapper;
 import org.easylenium.selenium.windows.WindowsBrowserManager;
@@ -27,114 +28,69 @@ public abstract class PageObjectData<T> extends ExecutorData<T>
 		this.timeout = wrapper.getTimeoutDefault();
 	}
 
-	public PageActionSimple by(By selector)
+	public Actions by(By selector)
 	{
-		return new PageActionSimple(windowsManager.current(), timeout, selector);
+		return new Actions(windowsManager.current(), timeout, selector);
 	}
 
-	public PageActionComplex by(By context, By selector)
+	public Actions css(String css, Object... args)
 	{
-		return new PageActionComplex(windowsManager.current(), timeout, context, selector);
+		return css(format(css, args));
 	}
 
-	public PageActionSimple css(String css)
-	{
-		return by(By.cssSelector(css));
-	}
-
-	public PageActionSimple css(String css, Object... args)
-	{
-		return css(String.format(css, args));
-	}
-
-	public PageActionComplex css(By context, String css)
-	{
-		return by(context, By.cssSelector(css));
-	}
-
-	public PageActionSimple xpath(String xpath)
+	public Actions xpath(String xpath)
 	{
 		return by(By.xpath(xpath));
 	}
 
-	public PageActionSimple xpath(String xpath, Object... args)
+	public Actions xpath(String xpath, Object... args)
 	{
-		return xpath((String.format(xpath, args)));
+		return xpath((format(xpath, args)));
 	}
 
-	public PageActionComplex xpath(By context, String xpath)
-	{
-		return by(context, By.xpath(xpath));
-	}
-
-	public PageActionSimple id(String id)
+	public Actions id(String id)
 	{
 		return by(By.id(id));
 	}
 
-	public PageActionComplex id(By context, String id)
-	{
-		return by(context, By.id(id));
-	}
-
-	public PageActionSimple linkText(String linkText)
+	public Actions linkText(String linkText)
 	{
 		return by(By.linkText(linkText));
 	}
 
-	public PageActionSimple linkText(String linkText, Object... args)
+	public Actions linkText(String linkText, Object... args)
 	{
-		return linkText(String.format(linkText, args));
+		return linkText(format(linkText, args));
 	}
 
-	public PageActionComplex linkText(By context, String linkText)
-	{
-		return by(context, By.linkText(linkText));
-	}
-
-	public PageActionSimple partialLinkText(String partialLinkText)
+	public Actions partialLinkText(String partialLinkText)
 	{
 		return by(By.partialLinkText(partialLinkText));
 	}
 
-	public PageActionSimple partialLinkText(String partialLinkText, Object... args)
+	public Actions partialLinkText(String partialLinkText, Object... args)
 	{
-		return partialLinkText(String.format(partialLinkText, args));
+		return partialLinkText(format(partialLinkText, args));
 	}
 
-	public PageActionComplex partialLinkText(By context, String partialLinkText)
-	{
-		return by(context, By.partialLinkText(partialLinkText));
-	}
-
-	public PageActionSimple className(String className)
+	public Actions className(String className)
 	{
 		return by(By.className(className));
 	}
 
-	public PageActionSimple className(String className, Object... args)
+	public Actions className(String className, Object... args)
 	{
-		return className(String.format(className, args));
+		return className(format(className, args));
 	}
 
-	public PageActionComplex className(By context, String className)
-	{
-		return by(context, By.className(className));
-	}
-
-	public PageActionSimple	tagName(String tagName)
+	public Actions tagName(String tagName)
 	{
 		return by(By.tagName(tagName));
 	}
 
-	public PageActionSimple tagName(String tagName, Object... args)
+	public Actions tagName(String tagName, Object... args)
 	{
-		return tagName(String.format(tagName, args)); 
-	}
-
-	public PageActionComplex tagName(By context, String tagName)
-	{
-		return by(context, By.tagName(tagName));
+		return tagName(format(tagName, args));
 	}
 
 	public String getTitle()

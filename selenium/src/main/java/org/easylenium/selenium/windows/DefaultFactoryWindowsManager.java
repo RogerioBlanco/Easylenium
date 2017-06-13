@@ -4,7 +4,6 @@ import org.easylenium.selenium.settings.SeleniumSettings;
 import org.easylenium.selenium.settings.Timeout;
 import org.easylenium.selenium.settings.TimeoutSeleniumWrapper;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DefaultFactoryWindowsManager implements FactoryWindowsManager
 {
@@ -17,16 +16,7 @@ public class DefaultFactoryWindowsManager implements FactoryWindowsManager
 
 	public WindowsBrowserManager newWindowsManager()
 	{
-		WebDriver webDriver = null;
-
-		switch (settings.getBrowser())
-		{
-		case FIREFOX:
-			webDriver = new FirefoxDriver();
-			break;
-		default:
-			break;
-		}
+		WebDriver webDriver = settings.getBrowser().newInstace();
 
 		setupTimeoutWebDriver(webDriver, settings.getTimeout());
 
@@ -55,7 +45,6 @@ public class DefaultFactoryWindowsManager implements FactoryWindowsManager
 				webDriver.quit();
 			}
 		});
-
 	}
 
 }
