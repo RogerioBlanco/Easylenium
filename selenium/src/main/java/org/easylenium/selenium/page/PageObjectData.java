@@ -33,6 +33,11 @@ public abstract class PageObjectData<T> extends ExecutorData<T>
 		return new Actions(windowsManager.current(), timeout, selector);
 	}
 
+	public Actions css(String css)
+	{
+		return by(By.cssSelector(css));
+	}
+	
 	public Actions css(String css, Object... args)
 	{
 		return css(format(css, args));
