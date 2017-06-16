@@ -1,6 +1,6 @@
 package org.easylenium.core.settings;
 
-import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,72 +14,54 @@ import org.easylenium.core.settings.exception.SettingsValidationException;
  * @author rogerionunes
  *
  */
-public class Settings
-{
+public class Settings {
 
 	private String projectName;
 
-	private String pathTestsSuites;
+	private Path testsSuitesDirectory;
 
-	private String pathTestsCases;
+	private Path testsCasesDirectory;
 
-	public void validate()
-	{
+	public void validate() {
 		if (StringUtils.isEmpty(projectName))
 			throw new SettingsValidationException("The name of project does not can be empty.");
 
-		if (!validPath(pathTestsSuites))
-			throw new SettingsValidationException("The directory path of test suites must be valid.");
+		if (testsSuitesDirectory == null)
+			throw new SettingsValidationException("The directory path of test suites cannot be null.");
 
-		if (!validPath(pathTestsCases))
-			throw new SettingsValidationException("The directory path of test cases must be valid.");
+		if (testsCasesDirectory == null)
+			throw new SettingsValidationException("The directory path of test cases cannot be null.");
 	}
 
-	private boolean validPath(String path)
-	{
-
-		try
-		{
-			Paths.get(path);
-		} catch (InvalidPathException e)
-		{
-			return Boolean.FALSE;
-		} catch (NullPointerException e)
-		{
-			return Boolean.FALSE;
+	private Path getPath(String path) {
+		try {
+			return Paths.get(path);
+		} catch (Exception e) {
+			throw new SettingsValidationException("The path '%s' must be valid.", path);
 		}
-
-		return Boolean.TRUE;
 	}
 
-	public String getProjectName()
-	{
+	public String getProjectName() {
 		return projectName;
 	}
 
-	public void setProjectName(String projectName)
-	{
+	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
 
-	public String getPathTestsSuites()
-	{
-		return pathTestsSuites;
+	public void setPathTestsSuites(String pathTestsSuites) {
+		this.testsSuitesDirectory = getPath(pathTestsSuites);
 	}
 
-	public void setPathTestsSuites(String pathTestsSuites)
-	{
-		this.pathTestsSuites = pathTestsSuites;
+	public void setPathTestsCases(String pathTestsCases) {
+		this.testsCasesDirectory = getPath(pathTestsCases);
 	}
 
-	public String getPathTestsCases()
-	{
-		return pathTestsCases;
+	public Path getTestsCasesDirectory() {
+		return testsCasesDirectory;
 	}
 
-	public void setPathTestsCases(String pathTestsCases)
-	{
-		this.pathTestsCases = pathTestsCases;
+	public Path getTestsSuitesDirectory() {
+		return testsSuitesDirectory;
 	}
-
 }

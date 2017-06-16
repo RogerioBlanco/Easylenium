@@ -13,5 +13,10 @@ public class SettingsValidationException extends RuntimeException
 	{
 		super(message);
 	}
+	
+	public SettingsValidationException(String message, Object... args)
+	{
+		this(String.format(message, args));
+	}
 
 }

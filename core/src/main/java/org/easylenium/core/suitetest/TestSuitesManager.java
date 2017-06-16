@@ -1,6 +1,7 @@
 package org.easylenium.core.suitetest;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,13 +21,13 @@ import junit.framework.TestSuite;
 public class TestSuitesManager
 {
 
-	private String path;
+	private Path path;
 
 	private Table<String, String, TestCase<?>> table;
 
 	private FactoryExecutor factory;
 
-	public TestSuitesManager(String path, Table<String, String, TestCase<?>> table, FactoryExecutor factory)
+	public TestSuitesManager(Path path, Table<String, String, TestCase<?>> table, FactoryExecutor factory)
 	{
 		this.path = path;
 		this.table = table;
@@ -37,7 +38,7 @@ public class TestSuitesManager
 	{
 		Collection<TestSuite> testsSuites = new ArrayList<TestSuite>();
 
-		Collection<File> files = new LoadFiles(path).loadRecursively();
+		Collection<File> files = new LoadFiles(path).load();
 
 		for (File file : files)
 		{

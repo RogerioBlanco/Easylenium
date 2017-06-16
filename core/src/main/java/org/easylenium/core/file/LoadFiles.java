@@ -1,40 +1,27 @@
 package org.easylenium.core.file;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class LoadFiles
-{
+public class LoadFiles {
 
-	private String directory;
+	private Path directory;
 
-	public LoadFiles(String directory)
-	{
+	public LoadFiles(Path directory) {
 		this.directory = directory;
 	}
 
-	public Collection<File> loadRecursively()
-	{
-		return loadRecursively(new File(directory));
-	}
-
-	private Collection<File> loadRecursively(File directory)
-	{
-		HashSet<File> set = new HashSet<File>();
-
-		for (File file : directory.listFiles())
-		{
-			if (file.isDirectory())
-			{
-				set.addAll(loadRecursively(file));
-			} else
-			{
-				set.add(file);
-			}
+	public Collection<File> load() {
+		try (Stream<Path> pathWalk = Files.walk(directory)) {
+			return pathWalk.filter(Files::isRegularFile).map(path -> path.toFile()).collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
-
-		return set;
 	}
 
 }

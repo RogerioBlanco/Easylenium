@@ -1,6 +1,7 @@
 package org.easylenium.core.testcase;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Collection;
 
 import org.easylenium.core.file.LoadFiles;
@@ -14,9 +15,9 @@ import org.xml.sax.SAXException;
 public class TestCaseDataManager
 {
 
-	private String path;
+	private Path path;
 
-	public TestCaseDataManager(String path)
+	public TestCaseDataManager(Path path)
 	{
 		this.path = path;
 	}
@@ -25,7 +26,7 @@ public class TestCaseDataManager
 	{
 		Table<String, String, TestCase<?>> table = new Table<String, String, TestCase<?>>();
 
-		Collection<File> files = new LoadFiles(path).loadRecursively();
+		Collection<File> files = new LoadFiles(path).load();
 
 		for (File file : files)
 		{

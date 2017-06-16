@@ -42,9 +42,9 @@ public class FactoryMainCore
 
 		TestSuite mainTestSuite = new TestSuite(settings.getProjectName());
 
-		Table<String, String, TestCase<?>> tableTestsCases = new TestCaseDataManager(settings.getPathTestsCases()).setUpAllTestsCases();
+		Table<String, String, TestCase<?>> tableTestsCases = new TestCaseDataManager(settings.getTestsCasesDirectory()).setUpAllTestsCases();
 
-		Collection<TestSuite> testsSuites = new TestSuitesManager(settings.getPathTestsSuites(), tableTestsCases, factory).createAllTestsSuites(custom);
+		Collection<TestSuite> testsSuites = new TestSuitesManager(settings.getTestsSuitesDirectory(), tableTestsCases, factory).createAllTestsSuites(custom);
 
 		for (TestSuite test : testsSuites)
 			mainTestSuite.addTest(test);

@@ -40,7 +40,6 @@ public class SuiteTestRootNode
 
 		for (NodeElement node : rootNode.getChildrenNodes())
 		{
-
 			ScenarioNode scenarioNode = new ScenarioNode(file, node);
 
 			list.add(scenarioNode);
