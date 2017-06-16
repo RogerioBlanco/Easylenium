@@ -7,8 +7,8 @@
 
 	<dependencies>
 		<dependency>
-			<artifactId>org.easylenium</artifactId>
-			<groupId>selenium</groupId>
+			<groupId>org.easylenium</groupId>
+			<artifactId>selenium</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
