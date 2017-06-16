@@ -6,6 +6,8 @@ public class TimeoutSeleniumWrapper
 {
 	private static final Timeout DEFAULT_TIMEOUT = new Timeout(TimeUnit.SECONDS, 2L);
 
+	public static final TimeoutSeleniumWrapper DEFAULT = new TimeoutSeleniumWrapper(DEFAULT_TIMEOUT, DEFAULT_TIMEOUT, DEFAULT_TIMEOUT, DEFAULT_TIMEOUT);
+	
 	private Timeout implicitlyWait;
 
 	private Timeout pageLoadTimeout;
