@@ -1,34 +1,35 @@
 package org.easylenium.selenium.settings;
 
 import org.easylenium.core.settings.Settings;
+import org.easylenium.selenium.browser.FactoryBrowser;
 import org.easylenium.selenium.settings.exception.SeleniumSettingsValidationException;
 
 public class SeleniumSettings extends Settings
 {
 
-	private Browser browser;
+	private FactoryBrowser factoryBrowser;
 
 	private TimeoutSeleniumWrapper timeoutManager;
 
-	public SeleniumSettings(Browser browser)
+	public SeleniumSettings(FactoryBrowser factory)
 	{
-		this.browser = browser;
+		this.factoryBrowser = factory;
 	}
 
 	public void validate()
 	{
 		super.validate();
 
-		if (browser == null)
-			throw new SeleniumSettingsValidationException("It must be selected at least one browser.");
+		if (factoryBrowser == null)
+			throw new SeleniumSettingsValidationException("It must be implemented a factory.");
 
 		if (timeoutManager == null)
 			throw new SeleniumSettingsValidationException("You must configure the default timeout.");
 	}
 
-	public Browser getBrowser()
+	public FactoryBrowser getFactoryBrowser()
 	{
-		return browser;
+		return factoryBrowser;
 	}
 
 	public void setTimeoutManager(TimeoutSeleniumWrapper timeoutManager)

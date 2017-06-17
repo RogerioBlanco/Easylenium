@@ -16,7 +16,7 @@ public class DefaultFactoryWindowsManager implements FactoryWindowsManager
 
 	public WindowsBrowserManager newWindowsManager()
 	{
-		WebDriver webDriver = settings.getBrowser().newInstace();
+		WebDriver webDriver = settings.getFactoryBrowser().newInstance();
 
 		setupTimeoutWebDriver(webDriver, settings.getTimeout());
 
